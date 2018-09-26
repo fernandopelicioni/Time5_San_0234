@@ -1,0 +1,86 @@
+object FormGeraCartaoBSE: TFormGeraCartaoBSE
+  Left = 0
+  Top = 0
+  BorderStyle = bsDialog
+  Caption = 'FormGeraCartaoBSE'
+  ClientHeight = 364
+  ClientWidth = 432
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object SpeedButton1: TSpeedButton
+    Left = 248
+    Top = 200
+    Width = 81
+    Height = 41
+    OnClick = SpeedButton1Click
+  end
+  object Gauge1: TGauge
+    Left = 8
+    Top = 264
+    Width = 416
+    Height = 73
+    Progress = 0
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 432
+    Height = 41
+    Align = alTop
+    Alignment = taLeftJustify
+    Caption = '  Gera'#231#227'o do Movimento BSE'
+    Color = 6935040
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWhite
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentBackground = False
+    ParentFont = False
+    TabOrder = 0
+    ExplicitWidth = 735
+  end
+  object QrHora: TADOQuery
+    Connection = Pai.Genoma
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      ''
+      
+        'select Hor_Tabela, Hor_Linha, Substring(Convert(char,A.Hor_Hora ' +
+        ',108),1,5) as Hora, B.Iti_sentido, * from tb_eschorarios A'
+      'Join tb_escitinerarios b On b.Iti_Cod = A.hor_Iti'
+      'where Hor_Coligada = 2 and Hor_Tabela = '#39'714/04:35'#39
+      'and Hor_Tipo = 1'
+      'order by A.Hor_Tabela, Hor_Hora, A.Hor_Linha, B.Iti_Sentido')
+    Left = 80
+    Top = 80
+  end
+  object DtHora: TDataSource
+    DataSet = QrHora
+    Left = 80
+    Top = 128
+  end
+  object QrBse: TADOQuery
+    Connection = Pai.Genoma
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from TB_ESCBSECARTAO')
+    Left = 168
+    Top = 80
+  end
+  object DtBse: TDataSource
+    DataSet = QrBse
+    Left = 168
+    Top = 136
+  end
+end

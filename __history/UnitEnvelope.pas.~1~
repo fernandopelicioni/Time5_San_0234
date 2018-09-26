@@ -1,0 +1,30 @@
+unit UnitEnvelope;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, pngimage, ExtCtrls, Grids, DBGrids, DB, ADODB;
+
+type
+  TFormEnvelope = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    QrEnvelope: TADOQuery;
+    DtEnvelope: TDataSource;
+    DBGrid1: TDBGrid;
+    Image2: TImage;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormEnvelope: TFormEnvelope;
+
+implementation
+
+{$R *.dfm}
+
+end.

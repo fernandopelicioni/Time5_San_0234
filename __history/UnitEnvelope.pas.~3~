@@ -1,0 +1,44 @@
+unit UnitEnvelope;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, pngimage, ExtCtrls, Grids, DBGrids, DB, ADODB, StdCtrls, DBCtrls;
+
+type
+  TFormEnvelope = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    QrEnvelope: TADOQuery;
+    DtEnvelope: TDataSource;
+    DBGrid1: TDBGrid;
+    Image2: TImage;
+    DBText1: TDBText;
+    DBText2: TDBText;
+    procedure Image2Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormEnvelope: TFormEnvelope;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFormEnvelope.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+Action:=Cafree;
+end;
+
+procedure TFormEnvelope.Image2Click(Sender: TObject);
+begin
+Close;
+end;
+
+end.

@@ -1,0 +1,100 @@
+unit UnitCapturaEscala;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, ExtCtrls, DB, ADODB, pngimage;
+
+type
+  TFormCapturaEscala = class(TForm)
+    Panel2: TPanel;
+    SpeedButton1: TSpeedButton;
+    OpenDialog1: TOpenDialog;
+    GroupBox1: TGroupBox;
+    Edit1: TEdit;
+    BitBtn1: TBitBtn;
+    Image1: TImage;
+    QrImp: TADOQuery;
+    Memo1: TMemo;
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure OpenDialog1SelectionChange(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormCapturaEscala: TFormCapturaEscala;
+
+implementation
+
+uses UnitPai;
+
+{$R *.dfm}
+
+procedure TFormCapturaEscala.BitBtn1Click(Sender: TObject);
+begin
+OpenDialog1.Execute;
+
+end;
+
+procedure TFormCapturaEscala.OpenDialog1SelectionChange(Sender: TObject);
+begin
+            Edit1.text:=OpenDialog1.FileName;
+
+end;
+
+procedure TFormCapturaEscala.SpeedButton1Click(Sender: TObject);
+VAR
+LendoTXT : TextFile;
+USUARIO,Coligada,LinhaArquivo : String;
+X : word;
+
+begin
+Screen.Cursor:=CrHourGlass;
+              X:=0;
+              memo1.Lines.Clear;
+              AssignFile(LendoTXT, Edit1.text);
+              Reset(LendoTXT);
+              ReadLn(LendoTXT, LinhaArquivo);
+              Coligada:=pai.QrColigadas.FieldByName('cod_Coligada').AsString;
+              Usuario :=pai.QrPeriodoAtivo.FieldByName('PTUSU_USUARIO').AsString;
+
+              while not(EOF(LendoTXT)) do
+                    begin
+                             With   QRIMP do
+                                  begin
+                                         Close;
+                                         Sql.Clear;
+                                         Sql.Add('Insert into TB_PtoImport (Pim_Data, PIM_CodBse, Pim_Matricula, Pim_Linha, Pim_Coligada, Pim_Usuario, Pim_Veiculo, Pim_Entrada, Pim_Iti, Pim_Itf, Pim_Saida) ');
+                                         Sql.Add('Values (' + QUOTEDSTR(Copy(LinhaArquivo,1,10))     + ',' +  //\\ Data
+                                                              QUOTEDSTR(Copy(LinhaArquivo,132,3))   + ',' +  //\\ CODBSE : Ainda nao disponivel no arquivo
+                                                              QUOTEDSTR(Copy(LinhaArquivo,101,6))    + ',' +  //\\ Matricula : Não é CODPRO
+                                                              QUOTEDSTR(Copy(LinhaArquivo,12,6))     + ',' +  //\\ Linha
+                                                              QuotedStr(Coligada)                    + ',' +  //\\ Coligada: So captura uma vez e usa variavel;
+                                                              QuotedStr(Usuario)                     + ',' +  //\\ Coligada: So captura uma vez e usa variavel;
+                                                              QUOTEDSTR(Copy(LinhaArquivo,19,6))     + ',' +  //\\ Veículo
+                                                              QUOTEDSTR(Copy(LinhaArquivo,34,5))     + ',' +  //\\ Entrada
+                                                              QUOTEDSTR(Copy(LinhaArquivo,43,5))     + ',' +  //\\ Inicio de Intervalo
+                                                              QUOTEDSTR(Copy(LinhaArquivo,52,5))     + ',' +  //\\ Fim do Intervalo
+                                                              QUOTEDSTR(Copy(LinhaArquivo,61,5))     + ')');   //\\ Saida
+//                                                              QUOTEDSTR(Copy(LinhaArquivo,132,3))    + ')');  //\\ Codigo do BSE, ultimos 3 caracteres numericos
+                                         memo1.lines.Add(sql.text);
+                                         ExecSQL;
+                                         X:=X+1;
+
+                                  end;
+                     ReadLn(LendoTXT, LinhaArquivo);
+                    end;
+
+MessageBox(0, 'A Captura já terminou, siga os procedimentos....', 'Resolvido', MB_ICONASTERISK or MB_OK);
+Screen.Cursor:=CrDefault;
+
+
+
+end;
+
+end.

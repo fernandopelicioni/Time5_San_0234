@@ -1,0 +1,109 @@
+unit UnitFuncaoPerfil;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, StdCtrls, DBCtrls, Mask, Grids, DBGrids, Buttons, ExtCtrls;
+
+type
+  TFormFuncaoPerfil = class(TForm)
+    GroupBox1: TGroupBox;
+    DBEdit1: TDBEdit;
+    DBText1: TDBText;
+    Label1: TLabel;
+    Label2: TLabel;
+    GroupBox2: TGroupBox;
+    DBEdit2: TDBEdit;
+    Label3: TLabel;
+    DBEdit3: TDBEdit;
+    Label4: TLabel;
+    DBCheckBox1: TDBCheckBox;
+    Label5: TLabel;
+    DBEdit4: TDBEdit;
+    Label6: TLabel;
+    DBEdit5: TDBEdit;
+    Label7: TLabel;
+    DBEdit6: TDBEdit;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    DBGrid1: TDBGrid;
+    DtPerfilFuncao: TDataSource;
+    BitBtn3: TBitBtn;
+    DBCheckBox3: TDBCheckBox;
+    DBEdit7: TDBEdit;
+    Label8: TLabel;
+    DBEdit8: TDBEdit;
+    Label9: TLabel;
+    DBCheckBox2: TDBCheckBox;
+    DBCheckBox4: TDBCheckBox;
+    DBCheckBox5: TDBCheckBox;
+    DBEdit9: TDBEdit;
+    Label10: TLabel;
+    DBEdit10: TDBEdit;
+    Label11: TLabel;
+    DBRadioGroup1: TDBRadioGroup;
+    DBEdit11: TDBEdit;
+    Label12: TLabel;
+    DBEdit12: TDBEdit;
+    Label13: TLabel;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure BitBtn3Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormFuncaoPerfil: TFormFuncaoPerfil;
+
+implementation
+
+uses UnitPai;
+
+{$R *.dfm}
+
+procedure TFormFuncaoPerfil.BitBtn1Click(Sender: TObject);
+begin
+         if (DtPerfilFuncao.DataSet.State = DsInsert) or (DtPerfilFuncao.DataSet.State = DsEdit) then
+               Begin
+                     DtPerfilFuncao.DataSet.Post;
+               End;
+
+end;
+
+procedure TFormFuncaoPerfil.BitBtn2Click(Sender: TObject);
+begin
+         DtPerfilFuncao.DataSet.Cancel;
+end;
+
+procedure TFormFuncaoPerfil.BitBtn3Click(Sender: TObject);
+begin
+      DtPerfilFuncao.DataSet.Cancel;
+      DtPerfilFuncao.DataSet.Insert;
+      DBEdit1.Setfocus;;
+end;
+
+procedure TFormFuncaoPerfil.DBGrid1DblClick(Sender: TObject);
+begin
+      DtPerfilFuncao.DataSet.Edit;
+end;
+
+procedure TFormFuncaoPerfil.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+DtPerfilFuncao.DataSet.Close;
+action:=cafree;
+end;
+
+procedure TFormFuncaoPerfil.FormShow(Sender: TObject);
+begin
+         DtPerfilFuncao.DataSet.Open;
+end;
+
+end.

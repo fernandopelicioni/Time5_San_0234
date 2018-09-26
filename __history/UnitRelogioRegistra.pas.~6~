@@ -1,0 +1,64 @@
+unit UnitRelogioRegistra;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, UnitRelogio, DB, ADODB, ExtCtrls, StdCtrls, pngimage, Grids, DBGrids,
+  DBCtrls;
+
+type
+  TFormRelogioRegistra = class(TFormRelogio)
+    Image1: TImage;
+    Label1: TLabel;
+    Image2: TImage;
+    Label2: TLabel;
+    Image3: TImage;
+    Label3: TLabel;
+    Image4: TImage;
+    Label4: TLabel;
+    Image5: TImage;
+    PainelRelogio: TPanel;
+    Shape3: TShape;
+    DtPro: TDataSource;
+    DBText1: TDBText;
+    DBText2: TDBText;
+    DBText3: TDBText;
+    DBText4: TDBText;
+    DBGrid1: TDBGrid;
+    procedure FormShow(Sender: TObject);
+    procedure Image5Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormRelogioRegistra: TFormRelogioRegistra;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFormRelogioRegistra.FormShow(Sender: TObject);
+begin
+  inherited;
+             With FormRelogioRegistra do
+                  Begin
+                      top :=0;
+                      Left :=0;
+                      Width := Screen.Width;
+                      Height := Screen.Height;
+
+                  End;
+
+end;
+
+procedure TFormRelogioRegistra.Image5Click(Sender: TObject);
+begin
+  inherited;
+close;
+end;
+
+end.

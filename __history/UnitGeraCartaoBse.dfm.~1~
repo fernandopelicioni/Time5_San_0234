@@ -1,0 +1,86 @@
+object FormGeraCartaoBSE: TFormGeraCartaoBSE
+  Left = 0
+  Top = 0
+  BorderStyle = bsDialog
+  Caption = 'FormGeraCartaoBSE'
+  ClientHeight = 364
+  ClientWidth = 735
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object SpeedButton1: TSpeedButton
+    Left = 264
+    Top = 288
+    Width = 81
+    Height = 41
+    OnClick = SpeedButton1Click
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 735
+    Height = 41
+    Align = alTop
+    Alignment = taLeftJustify
+    Caption = '  Gera'#231#227'o do Movimento BSE'
+    Color = 6935040
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWhite
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentBackground = False
+    ParentFont = False
+    TabOrder = 0
+    ExplicitWidth = 457
+  end
+  object DBGrid1: TDBGrid
+    Left = 407
+    Top = 209
+    Width = 320
+    Height = 120
+    DataSource = DtHora
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object QrHora: TADOQuery
+    Connection = Pai.Genoma
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      ''
+      
+        'select Hor_Tabela, Hor_Linha, Substring(Convert(char,A.Hor_Hora ' +
+        ',108),1,5) as Hora, B.Iti_sentido, * from tb_eschorarios A'
+      'Join tb_escitinerarios b On b.Iti_Cod = A.hor_Iti'
+      'where Hor_Coligada = 2and Hor_Tabela = '#39'714/04:35'#39
+      'and Hor_Tipo = 1'
+      'order by A.Hor_Tabela, Hor_Hora, A.Hor_Linha, B.Iti_Sentido')
+    Left = 408
+    Top = 64
+  end
+  object DtHora: TDataSource
+    DataSet = QrHora
+    Left = 408
+    Top = 112
+  end
+  object QrBse: TADOQuery
+    Connection = Pai.Genoma
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select * from TB_ESCBSECARTAO')
+    Left = 496
+    Top = 64
+  end
+end

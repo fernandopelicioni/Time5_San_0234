@@ -1,0 +1,205 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{071BDF3D-F227-415F-A1DF-410BD6E377F3}</ProjectGuid>
+			<MainSource>Time2018.dpr</MainSource>
+			<ProjectVersion>12.2</ProjectVersion>
+			<Base>True</Base>
+			<Config Condition="'$(Config)'==''">Release</Config>
+			<Platform>Win32</Platform>
+			<AppType>Application</AppType>
+			<FrameworkType>VCL</FrameworkType>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_UsePackage>vclimg;vcl;vclx;dbrtl;Rave90VCL;bdertl;rtl;xmlrtl;vclactnband;VclSmp;svnui;svn;TeeUI;Tee;TeeDB;vcldb;vcldbx;vcltouch;dsnap;dsnapcon;vclib;ibxpress;adortl;IndyCore;IndySystem;IndyProtocols;inet;intrawebdb_110_150;Intraweb_110_150;vclie;websnap;webdsnap;inetdb;inetdbbde;inetdbxpress;soaprtl;vclribbon;dbexpress;DbxCommonDriver;DataSnapIndy10ServerTransport;DataSnapProviderClient;DbxClientDriver;DataSnapClient;dbxcds;DataSnapServer;AzureCloud;DBXInterBaseDriver;DBXMySQLDriver;DBXFirebirdDriver;DBXSybaseASEDriver;DBXSybaseASADriver;DBXOracleDriver;DBXMSSQLDriver;DBXInformixDriver;DBXDb2Driver;CodeSiteExpressVcl</DCC_UsePackage>
+			<DCC_ImageBase>00400000</DCC_ImageBase>
+			<DCC_DcuOutput>.\$(Config)\$(Platform)</DCC_DcuOutput>
+			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;$(DCC_UnitAlias)</DCC_UnitAlias>
+			<DCC_ExeOutput>.\$(Config)\$(Platform)</DCC_ExeOutput>
+			<DCC_E>false</DCC_E>
+			<DCC_N>false</DCC_N>
+			<DCC_S>false</DCC_S>
+			<DCC_F>false</DCC_F>
+			<DCC_K>false</DCC_K>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+			<DCC_Optimize>false</DCC_Optimize>
+			<DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="Time2018.dpr">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="UnitEntrada.pas">
+				<Form>FormEntrada</Form>
+			</DCCReference>
+			<DCCReference Include="UnitPai.pas">
+				<Form>Pai</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="UnitIniciaSistema.pas">
+				<Form>FormIniciaSistema</Form>
+			</DCCReference>
+			<DCCReference Include="UnitTipoDia.pas">
+				<Form>FormCadastroTipoDia</Form>
+			</DCCReference>
+			<DCCReference Include="UnitCadastroEventos.pas">
+				<Form>FormCadastraEventos</Form>
+			</DCCReference>
+			<DCCReference Include="UnitAtivaPeriodo.pas">
+				<Form>FormAtivaPeriodos</Form>
+			</DCCReference>
+			<DCCReference Include="UnitProDisp.pas">
+				<Form>FormProDisp</Form>
+			</DCCReference>
+			<DCCReference Include="UnitPeriodoCriar.pas">
+				<Form>FormPeriodoCriar</Form>
+			</DCCReference>
+			<DCCReference Include="UnitFuncaoPerfil.pas">
+				<Form>FormFuncaoPerfil</Form>
+			</DCCReference>
+			<DCCReference Include="UnitDispInclui.pas">
+				<Form>FormDispInclui</Form>
+			</DCCReference>
+			<DCCReference Include="Utraducao.pas"/>
+			<DCCReference Include="UnitDispEnvelope.pas">
+				<Form>FormDispEnvelope</Form>
+			</DCCReference>
+			<DCCReference Include="UnitLancamento.pas">
+				<Form>FormLancamento</Form>
+			</DCCReference>
+			<DCCReference Include="UnitProBusca.pas">
+				<Form>FormProBusca</Form>
+			</DCCReference>
+			<DCCReference Include="UnitRelatorio.pas">
+				<Form>Relatorio</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="UnitTerminal.pas">
+				<Form>FormTerminal</Form>
+			</DCCReference>
+			<DCCReference Include="UnitCadastroFuncoes.pas">
+				<Form>FormCadastroFuncao</Form>
+			</DCCReference>
+			<DCCReference Include="UnitCentralRelatorio.pas">
+				<Form>FormCentralRelatorio</Form>
+			</DCCReference>
+			<DCCReference Include="UnitCadastraProventos.pas">
+				<Form>FormCadastraProventos</Form>
+			</DCCReference>
+			<DCCReference Include="UnitGeraFeriado.pas">
+				<Form>FormGeraFeriado</Form>
+			</DCCReference>
+			<DCCReference Include="UnitCriaArquivo.pas">
+				<Form>FormCriaArquivo</Form>
+			</DCCReference>
+			<DCCReference Include="UnitNotaVersao.pas">
+				<Form>FormNotasVersao</Form>
+			</DCCReference>
+			<DCCReference Include="UnitTerminalDetalhes.pas">
+				<Form>FormTerminalDetalhes</Form>
+			</DCCReference>
+			<DCCReference Include="UnitEnvelope.pas">
+				<Form>FormEnvelope</Form>
+			</DCCReference>
+			<DCCReference Include="UnitCapturaEscala.pas">
+				<Form>FormCapturaEscala</Form>
+			</DCCReference>
+			<DCCReference Include="UnitImportaEscala.pas">
+				<Form>FormImportaEscala</Form>
+			</DCCReference>
+			<DCCReference Include="UnitIndicadorGrafico.pas">
+				<Form>FormIndicadorGrafico</Form>
+			</DCCReference>
+			<DCCReference Include="UnitEtiquetaCartao.pas">
+				<Form>FormEtiquetaCartao</Form>
+			</DCCReference>
+			<DCCReference Include="Pessoal\UtMaoObra.pas">
+				<Form>FormMaoObra</Form>
+			</DCCReference>
+			<DCCReference Include="UnitImportaColaborador.pas">
+				<Form>FormImportaColaborador</Form>
+			</DCCReference>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')" Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
+		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\8.0\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\8.0\UserTools.proj"/>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Delphi.Personality>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">True</VersionInfo>
+						<VersionInfo Name="MajorVer">2</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">2</VersionInfo>
+						<VersionInfo Name="Build">41</VersionInfo>
+						<VersionInfo Name="Debug">True</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">True</VersionInfo>
+						<VersionInfo Name="Locale">1046</VersionInfo>
+						<VersionInfo Name="CodePage">1252</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName">Genoma Software</VersionInfoKeys>
+						<VersionInfoKeys Name="FileDescription"/>
+						<VersionInfoKeys Name="FileVersion">2.0.2.41</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename">Time.EXE</VersionInfoKeys>
+						<VersionInfoKeys Name="ProductName">Time - Automação de Ponto</VersionInfoKeys>
+						<VersionInfoKeys Name="ProductVersion">0.6.4.26</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+					<Source>
+						<Source Name="MainSource">Time2018.dpr</Source>
+					</Source>
+					<Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\bcboffice2k150.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\bcbofficexp150.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dcloffice2k150.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dclofficexp150.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+					</Excluded_Packages>
+				</Delphi.Personality>
+				<Platforms>
+					<Platform value="Win32">True</Platform>
+				</Platforms>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+	</Project>

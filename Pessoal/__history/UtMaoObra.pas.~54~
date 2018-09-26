@@ -1,0 +1,263 @@
+unit UtMaoObra;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, ADODB, ExtCtrls, ImgList, DBCtrls, Mask, StdCtrls, Grids,
+  DBGrids, ComCtrls, Buttons;
+
+type
+  TFormMaoObra = class(TForm)
+    QrPro: TADOQuery;
+    BcoImagens: TImageList;
+    DtPro: TDataSource;
+    Panel1: TPanel;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    Label1: TLabel;
+    Label2: TLabel;
+    ComboBox1: TComboBox;
+    EditBusca: TEdit;
+    Button1: TButton;
+    tabLista: TTabSheet;
+    BtAlterar: TButton;
+    DBGrid1: TDBGrid;
+    TabPonto: TTabSheet;
+    GroupBox3: TGroupBox;
+    Label5: TLabel;
+    Label6: TLabel;
+    DBEdit3: TDBEdit;
+    DBEdit4: TDBEdit;
+    DBRadioGroup2: TDBRadioGroup;
+    QrFuncaoExercida: TADOQuery;
+    DtFuncaoExercida: TDataSource;
+    BtSalvar: TButton;
+    BtCancelar: TButton;
+    QrNewPro: TADOQuery;
+    DtnewPro: TDataSource;
+    DBLookupComboBox2: TDBLookupComboBox;
+    DBEdit1: TDBEdit;
+    Label3: TLabel;
+    Label4: TLabel;
+    TabSheet2: TTabSheet;
+    Button2: TButton;
+    q2: TADOQuery;
+    Memo1: TMemo;
+    OpenDialog1: TOpenDialog;
+    Edit1: TEdit;
+    SpeedButton1: TSpeedButton;
+    DBEdit2: TDBEdit;
+    Label7: TLabel;
+    Label8: TLabel;
+    DBEdit5: TDBEdit;
+    Label9: TLabel;
+    Label10: TLabel;
+    DBEdit6: TDBEdit;
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure BtCancelarClick(Sender: TObject);
+    procedure BtSalvarClick(Sender: TObject);
+    procedure tabListaShow(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure BtAlterarClick(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure TabPontoShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    chapaI,nomeI:String;
+  end;
+
+var
+  FormMaoObra: TFormMaoObra;
+  TXT:TextFile;
+implementation
+
+uses UnitPai;
+
+{$R *.dfm}
+
+procedure TFormMaoObra.BtAlterarClick(Sender: TObject);
+begin
+     QrNewPro.Open;
+     QrNewPro.Insert;
+     GroupBox3.Enabled:=true;
+     TabPonto.Show;
+end;
+
+procedure TFormMaoObra.BtCancelarClick(Sender: TObject);
+begin
+   DtnewPro.DataSet.Cancel;
+   GroupBox3.Enabled:=false;
+     tabLista.Show;
+
+end;
+
+procedure TFormMaoObra.BtSalvarClick(Sender: TObject);
+begin
+     DtnewPro.DataSet.FieldByName('fun_pro').AsString:=DBLookupComboBox2.KeyValue;
+     DtnewPro.DataSet.Post;
+     DtPro.DataSet.First;
+//     DtPro.DataSet.Refresh;
+GroupBox3.Enabled:=false;
+     tabLista.Show;
+
+end;
+
+procedure TFormMaoObra.Button1Click(Sender: TObject);
+begin
+      if EditBusca.Text <>'' then
+          begin
+                ChapaI:='%'+EditBusca.Text+'%';
+                NomeI:='%'+EditBusca.Text+'%';
+          end
+          else
+          begin
+                ChapaI:='%';
+                NomeI:='%';
+          end;
+      With QrPro do
+           begin
+                 close;
+                 Parameters.ParamByName('Chi').value:=chapaI;
+                 Parameters.ParamByName('Ni').value:=NomeI;
+                 Parameters.ParamByName('coligada').Value:=Pai.QrColigadas.FieldByName('cod_coligada').AsString;
+                 Open;
+           end;
+
+//      if ComboBox1.ItemIndex = 0 then With QrPro do Locate('Nome',EditBusca.Text, [loCaseInsensitive, loPartialKey] );
+//      if ComboBox1.ItemIndex = 1 then With QrPro do Locate('Chapa4Dg', EditBusca.Text,[loCaseInsensitive, loPartialKey]);
+      PageControl1.ActivePageIndex:=1;
+
+end;
+
+procedure TFormMaoObra.Button2Click(Sender: TObject);
+var
+VCHAPA, VNOME, VFUNCAO, VADMISSAO, VCART, VSERIE, VUF, ENTRADA: string;
+Quebra: TStringList;
+ Vseg:word;
+begin
+      screen.Cursor:=crHourGlass;
+     Reset(TXT);
+   //  Quebra:=TStringList.create;
+//     ReadLn(Txt,Entrada); // pula cabeçalho
+//     ReadLn(Txt,Entrada); // pula cabeçalho
+     if not Eoln(TXT) then
+            Begin
+                    repeat
+//                         Quebra.Clear;
+//                         vseg:=vseg+1;
+                         //if vseg>59  then vseg:=1;
+                        // ExtractStrings([';'],[],pchar(entrada),quebra);
+                          ReadLn(Txt,Entrada); // pula cabeçalho
+                          VCHAPA:=COPY(ENTRADA,1,4);
+                          VNOME:=COPY(ENTRADA,18,50);
+                          VADMISSAO:=COPY(ENTRADA,139,10);
+                          VFUNCAO:=COPY(ENTRADA,150,1);
+                          VCART:=COPY(ENTRADA,162,6);
+                          VSERIE:=COPY(ENTRADA,175,5);
+                          VCART:=COPY(ENTRADA,189,2);
+//                          VCART:=COPY(ENTRADA,175,6);
+                           MEMO1.Text:=VCHAPA + ' ' + VNOME + ' ' + VCART + ' ' + VSERIE;
+
+                          WITH Q2 DO
+                                 BEGIN
+                                           CLOSE;
+                                           SQL.CLEAR;
+                                           SQL.Add('INSERT INTO TB_PROFISSIONAIS (CHA_PRO, NOM_PRO, COD_COLIGADA, PRO_FUNCAOEXERCIDA, FUN_PRO, DT_ADMISSAO, PRO_CTPS_NUM,PRO_CTPS_SERIE,UF_PRO)');
+                                           SQL.Add('VALUES (' +
+                                           QUOTEDSTR(VCHAPA)                                             +','+
+                                           QUOTEDSTR(VNOME)                                              +','+
+                                           '4'          +','+
+                                           QUOTEDSTR(vFUNCAO)                                            +','+
+                                           QUOTEDSTR(vFUNCAO)                                            +','+
+                                           QUOTEDSTR(VADMISSAO)                                          +','+
+                                           QUOTEDSTR(VCART)                                              +','+
+                                           QUOTEDSTR(VSERIE)                                             +','+
+                                           QUOTEDSTR(VUF)                                                +')');
+                                           //QUOTEDSTR(VADMISSAO)                                          +')');
+                                           EXECSQL;
+                                    END;
+
+
+                              // ReadLn(Txt,Entrada);
+//                               gauge1.Progress:=Gauge1.Progress+1;
+                    until Eoln(TXT) ;
+            End;
+            Screen.Cursor:=crDefault;
+            MessageBox(Handle,'Terminei, Importei todos as Cargas, já pode cruzar os dados!','Concluído',Mb_IconInformation+Mb_Ok);
+
+end;
+
+procedure TFormMaoObra.Button5Click(Sender: TObject);
+begin
+Screen.Cursor:=crHourGlass;
+end;
+
+procedure TFormMaoObra.DBGrid1DblClick(Sender: TObject);
+begin
+       With QrNewPro do
+            begin
+                  close;
+                  Parameters.ParamByName('Chapa').value:=QrPro.FieldByName('chapa').AsString;
+                  open;
+            end;
+       GroupBox3.Enabled:=true;
+       TabPonto.Show;
+end;
+
+procedure TFormMaoObra.FormCreate(Sender: TObject);
+begin
+                ChapaI:='%';
+
+end;
+
+procedure TFormMaoObra.FormShow(Sender: TObject);
+begin
+      With QrPro do
+           begin
+                 close;
+                 Parameters.ParamByName('Chi').value:='%';
+                 Parameters.ParamByName('Ni').value:='%';
+                 Parameters.ParamByName('coligada').Value:=Pai.QrColigadas.FieldByName('cod_coligada').AsString;
+                 Open;
+                 fIRST;
+           end;
+      DtFuncaoExercida.DataSet.Open;
+end;
+
+procedure TFormMaoObra.SpeedButton1Click(Sender: TObject);
+begin
+if OpenDialog1.Execute then
+     Begin
+          Edit1.Text:=(OpenDialog1.FileName);
+          AssignFile(Txt,OpenDialog1.FileName);
+
+     End;
+
+end;
+
+procedure TFormMaoObra.tabListaShow(Sender: TObject);
+begin
+      With QrPro do
+           begin
+                 close;
+                 Parameters.ParamByName('Chi').value:=chapaI;
+                 Parameters.ParamByName('Ni').value:=NomeI;
+                 Parameters.ParamByName('coligada').Value:=Pai.QrColigadas.FieldByName('cod_coligada').AsString;
+                 Open;
+                 fIRST;
+           end;
+end;
+
+procedure TFormMaoObra.TabPontoShow(Sender: TObject);
+begin
+   QrFuncaoExercida.Open;
+end;
+
+end.

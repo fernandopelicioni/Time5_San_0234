@@ -1,0 +1,239 @@
+object FormTerminal: TFormTerminal
+  Left = 0
+  Top = 0
+  BorderStyle = bsNone
+  Caption = 'FormTerminal'
+  ClientHeight = 762
+  ClientWidth = 1398
+  Color = 14211288
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Shape2: TShape
+    Left = 0
+    Top = 633
+    Width = 1398
+    Height = 129
+    Align = alBottom
+    Brush.Color = clBlack
+    ExplicitLeft = 8
+    ExplicitTop = 608
+    ExplicitWidth = 1255
+  end
+  object LabelHora: TLabel
+    Left = 72
+    Top = 637
+    Width = 102
+    Height = 75
+    Caption = '3:03'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWhite
+    Font.Height = -64
+    Font.Name = 'Arial Narrow'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Shape1: TShape
+    Left = 0
+    Top = 0
+    Width = 1398
+    Height = 65
+    Align = alTop
+    Brush.Color = clBlack
+    ExplicitWidth = 1255
+  end
+  object LabelColigada: TLabel
+    Left = 8
+    Top = 611
+    Width = 86
+    Height = 20
+    Caption = 'LabelColigada'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWhite
+    Font.Height = -16
+    Font.Name = 'Arial Narrow'
+    Font.Style = []
+    ParentFont = False
+    Transparent = True
+  end
+  object LabelData: TLabel
+    Left = 72
+    Top = 705
+    Width = 277
+    Height = 40
+    Caption = 'Monday, November 12'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clGray
+    Font.Height = -33
+    Font.Name = 'Arial Narrow'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label1: TLabel
+    Left = 519
+    Top = 112
+    Width = 346
+    Height = 40
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'Digite aqui seu registro'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clGray
+    Font.Height = -33
+    Font.Name = 'Arial Narrow'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 958
+    Top = 697
+    Width = 384
+    Height = 40
+    Caption = 'Genoma Software e Tecnologia'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -33
+    Font.Name = 'Arial Narrow'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label3: TLabel
+    Left = 473
+    Top = 2
+    Width = 425
+    Height = 57
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'Terminal de Consultas'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = 16758711
+    Font.Height = -48
+    Font.Name = 'Arial Narrow'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Panel1: TPanel
+    Left = 514
+    Top = 160
+    Width = 346
+    Height = 425
+    TabOrder = 0
+    object TouchKeyboard1: TTouchKeyboard
+      Left = 2
+      Top = 88
+      Width = 344
+      Height = 336
+      GradientEnd = clSilver
+      GradientStart = clGray
+      Layout = 'NumPad'
+      CustomCaptionOverrides = {
+        010000000200000002000000124200610063006B00730070006100630065000A
+        4C0069006D0070006100020000000A45006E00740065007200044F006B00}
+    end
+    object MaskEdit1: TMaskEdit
+      Left = 1
+      Top = 1
+      Width = 344
+      Height = 81
+      Align = alTop
+      BevelInner = bvSpace
+      Ctl3D = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = 16711808
+      Font.Height = -64
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      MaxLength = 4
+      ParentCtl3D = False
+      ParentFont = False
+      TabOrder = 1
+      OnKeyPress = MaskEdit1KeyPress
+    end
+  end
+  object Timer1: TTimer
+    Interval = 10000
+    OnTimer = Timer1Timer
+    Left = 784
+    Top = 40
+  end
+  object DtColigada: TDataSource
+    DataSet = Pai.QrColigadas
+    Left = 136
+    Top = 88
+  end
+  object QrTemp: TADOQuery
+    Connection = Pai.Genoma
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select case DATEPART(DW, GETDATE())'
+      '    when 1 Then '#39'Domingo'#39
+      '    when 2 Then '#39'Segunda'#39
+      '    when 3 Then '#39'Ter'#231'a'#39
+      '    when 4 Then '#39'Quarta'#39
+      '    when 5 Then '#39'Quinta'#39
+      '    when 6 Then '#39'Sexta'#39
+      '    when 7 Then '#39'Sabado'#39
+      '    End DiaSemana,'
+      'case DATEPART(MONTH, GETDATE())'
+      '    when 1 Then '#39'Janeiro'#39
+      '    when 2 Then '#39'Fevereiro'#39
+      '    when 3 Then '#39'Mar'#231'o'#39
+      '    when 4 Then '#39'Abril'#39
+      '    when 5 Then '#39'Maio'#39
+      '    when 6 Then '#39'Junho'#39
+      '    when 7 Then '#39'Julho'#39
+      '    when 8 Then '#39'Agosto'#39
+      '    when 9 Then '#39'Setembro'#39
+      '    when 10 Then '#39'Outubro'#39
+      '    when 11 Then '#39'Novembro'#39
+      '    when 12 Then '#39'Dezembro'#39
+      '    End Mes,'
+      '    '
+      
+        'CONVERT(varchar(5), GETDATE(),114) as Hora, CONVERT(varchar(2), ' +
+        'GETDATE(),103) Dia, CONVERT(varchar(4), GETDATE(),102) ano')
+    Left = 104
+    Top = 88
+  end
+  object QrPro: TADOQuery
+    Connection = Pai.Genoma
+    CursorType = ctStatic
+    Parameters = <
+      item
+        Name = 'coligada'
+        DataType = ftWord
+        Precision = 3
+        Size = 1
+        Value = Null
+      end
+      item
+        Name = 'chapa'
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 4
+        Value = Null
+      end>
+    SQL.Strings = (
+      'Select '
+      'Cha_pro,'
+      'COD_PRO,'
+      'NOM_PRO as Nome '
+      ''
+      ' from Tb_profissionais A'
+      'Join Tb_Funcao B on B.cod_funcao =a.fun_pro'
+      'where '
+      'Cod_Coligada=:coligada'
+      'and cha_pro=:chapa')
+    Left = 168
+    Top = 88
+  end
+end

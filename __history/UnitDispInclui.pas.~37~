@@ -1,0 +1,191 @@
+unit UnitDispInclui;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, ExtCtrls, ADODB, DBCtrls, Mask, StdCtrls, Buttons, ComCtrls;
+
+type
+  TFormDispInclui = class(TForm)
+    Panel1: TPanel;
+    GroupBox1: TGroupBox;
+    Label3: TLabel;
+    Label4: TLabel;
+    DtEventos: TDataSource;
+    DBLookupComboBox1: TDBLookupComboBox;
+    Label5: TLabel;
+    QrEventos: TADOQuery;
+    BitBtn1: TBitBtn;
+    BitBtn2: TBitBtn;
+    DtIni: TDateTimePicker;
+    DtFim: TDateTimePicker;
+    DBText1: TDBText;
+    DBText2: TDBText;
+    DtPeriodoAtivo: TDataSource;
+    Memo1: TMemo;
+    Dtperiodo: TDataSource;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure DtIniKeyPress(Sender: TObject; var Key: Char);
+    procedure DtFimKeyPress(Sender: TObject; var Key: Char);
+    procedure DBLookupComboBox1KeyPress(Sender: TObject; var Key: Char);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormDispInclui: TFormDispInclui;
+
+implementation
+
+uses UnitPai, UnitProDisp;
+
+{$R *.dfm}
+
+procedure TFormDispInclui.BitBtn1Click(Sender: TObject);
+Var VDtInicio, VDtFim :Tdate;
+VdataInicial, vdatafinal:TDate;
+Horas: Integer;
+Q,q2: tadoquery;
+valor: integer;
+begin
+           if DBLookupComboBox1.KeyValue =
+            Null then
+                 begin
+                       MessageBox(0, 'Você precisa informar um evento para continuar!', 'Evento não informado', MB_ICONERROR or MB_OK);
+                       abort;
+                 end;
+           VDtInicio          :=DtIni.Date;
+           VDtFim             :=(DtFim.Date);
+            Q:=tadoquery.create(nil);
+            Q.Connection:=Pai.Genoma;
+            Q.SQL.Text:=('SELECT * FROM TB_PTOMOV WHERE PTO_DATA >=:INICIO AND PTO_DATA<=:FIM AND PTO_CHAPA=:CHAPA and PTO_COLIGADA=:COLIGADA AND PTO_PERIODO=:PERIODO');
+            q.Parameters.ParamByName('inicio').Value:=DateToStr(VDTINICIO);
+            q.Parameters.ParamByName('FIM').Value:=dATEtOSTR(VDTFIM);
+            q.Parameters.ParamByName('CHAPA').Value:=FormProDisp.DtPro.DataSet.FieldByName('COD_PRO').AsString;
+            q.Parameters.ParamByName('COLIGADA').Value:=Pai.QrColigadas.FieldByName('COD_COLIGADA').ASSTRING;
+            q.Parameters.ParamByName('PERIODO').Value:=FormProDisp.DtPeriodoAtivo.DataSet.FieldByName('PTUSU_PERIODO').ASSTRING;
+
+            Q.Open;
+            if nOT Q.EOF then
+                  BEGIN
+                          MessageBox(0, 'Ja existem registros gravados dentro do período informado.'+#13+#10+''+#13+#10+'Ajuste as datas e refaça, caso necessário, exclua algum lançamento!', 'Registros duplicados', MB_ICONSTOP or MB_OK);
+                          Abort;
+                  END;
+             Q.Free;
+
+         VDataInicial:=StrToDate(DtPeriodoAtivo.DataSet.FieldByName('Tpe_Inicio').AsSTRING);
+         VDataFinal:=StrToDate(DtPeriodoAtivo.DataSet.FieldByName('Tpe_Fim').Asstring);
+
+
+
+         if      (VDtInicio >= VdataInicial) and (VdtFim <= vdatafinal) and (VDtInicio <= VDtFim)  then
+                 begin
+                     // Pega Codigo do PtoMov.. Depois preenche os dados para montar o SQL
+                     Pai.ENT1     :=0; Pai.SAI1:=0; Pai.TOT1:=0; Pai.VEI1:='0';
+                     Pai.ENT2     :=0; Pai.SAI2:=0; Pai.TOT2:=0; Pai.VEI2:='0';
+                     Pai.ENT3     :=0; Pai.SAI3:=0; Pai.TOT3:=0; Pai.VEI3:='0';
+                     Pai.ENT4     :=0; Pai.SAI4:=0; Pai.TOT4:=0; Pai.VEI4:='0';
+                     Pai.ENT5     :=0; Pai.SAI5:=0; Pai.TOT5:=0; Pai.VEI5:='0';
+
+                     Pai.PtoCod         :=Pai.GeraSeq('PtoMov');
+                     Pai.SqlChapa       :=FormProDisp.DtPro.DataSet.FieldByName('cod_pro').AsString;
+                     Pai.PtoUsuario     :=Pai.Qrusuarios.FieldByName('Usu_Codigo').AsInteger;
+                     Pai.PtoPeriodo     :=DtPeriodoAtivo.DataSet.FieldByName('Tpe_Cod').AsInteger;
+                     Pai.PtoEvento      :=DtEventos.DataSet.FieldByName('Tve_Cod').AsInteger;
+                      // Data esta na repeticao abaixo
+                     Pai.PtoFun         :=FormProDisp.DtPro.DataSet.FieldByName('CodPerfil').AsInteger;
+                     Pai.JorLocal       :='NULL';
+                     Pai.JorMatricula   :=FormProdisp.DtPro.DataSet.FieldByName('Chapa').AsString;
+                     Pai.JorSaldo       :=FormProDisp.DtPro.DataSet.FieldByName('Jornada').AsString;
+
+                     Pai.VJORNADA       := FormProDisp.DtPro.DataSet.FieldByName('JornadaRef ').AsInteger;
+                     Pai.JorRef         :=1; //Pai.GeraRef(Pai.JorSaldo); // Funcao caucula ref do total de hoars da linah jornada, diferente do saldo de horas do movimento
+
+                     while VDtInicio <= VDtFim do
+                         Begin
+
+                                Pai.PtoCod:=Pai.GeraSeq('PtoMov');
+                                Pai.PtoData:=VDtInicio;
+
+                                Pai.InserirMov1Click(nil);
+
+                                VDtInicio:=VDtInicio+1;
+                         End;
+
+                     Close;
+                 end
+                 else
+                 begin
+                 MessageBox(0, 'Opssssss! Voce digitou algo errado, a data informada não compreende o período ativo, verifique isso!', 'Período inválido', MB_ICONWARNING or MB_OK);
+                 showMessage(DtPeriodoAtivo.DataSet.FieldByName('Tpe_Inicio').AsSTRING + ' - ' + DateToStr(DtIni.Date) + ' - ' + DtPeriodoAtivo.DataSet.FieldByName('Tpe_Fim').AsSTRING + ' - ' + DateToStr(DtFim.Date) );
+                 DtIni.SetFocus;
+                 end;
+end;
+
+procedure TFormDispInclui.BitBtn2Click(Sender: TObject);
+begin
+          QrEventos.Cancel;
+          Close;
+end;
+
+procedure TFormDispInclui.DBLookupComboBox1KeyPress(Sender: TObject;
+  var Key: Char);
+begin
+if Key = #13 then
+     begin
+          Key:=#0;
+          BitBtn1.SetFocus;
+     end;
+
+end;
+
+procedure TFormDispInclui.DtFimKeyPress(Sender: TObject; var Key: Char);
+begin
+if Key = #13 then
+     begin
+          Key:=#0;
+          if DtFim.Date >= DtIni.Date then
+                begin
+                      DBLookupComboBox1.SetFocus;
+                end
+                else
+                begin
+                      MessageBox(0, 'Data final não pode ser menor que a inicial, '+#13+#10+'Tente novamente...', 'Erro na operação', MB_ICONERROR or MB_OK);
+                      DtIni.SetFocus;
+                end;
+     end;
+
+end;
+
+procedure TFormDispInclui.DtIniKeyPress(Sender: TObject; var Key: Char);
+begin
+if Key = #13 then
+     begin
+          Key:=#0;
+          DtFim.Date:=DtIni.Date;
+          DtFim.SetFocus;
+     end;
+end;
+
+procedure TFormDispInclui.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+          FormProDisp.SpeedButton5.Click;
+          QrEventos.Close;
+          Action:=cafree;
+end;
+
+procedure TFormDispInclui.FormShow(Sender: TObject);
+begin
+          DtIni.date:=StrToDate(DtPeriodoAtivo.DataSet.FieldByName('Tpe_Inicio').AsString);
+          Dtfim.date:=StrToDate(DtPeriodoAtivo.DataSet.FieldByName('Tpe_Fim').AsString);
+          QrEventos.Open;
+
+end;
+
+end.

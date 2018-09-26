@@ -1,0 +1,45 @@
+unit UnitRelogioLogin;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, UnitRelogio, ExtCtrls, Keyboard, StdCtrls, jpeg, DB, ADODB;
+
+type
+  TFormRelogioLogin = class(TFormRelogio)
+    Label2: TLabel;
+    PainelRelogio: TPanel;
+    Edit1: TEdit;
+    TouchKeyboard1: TTouchKeyboard;
+    QrPro: TADOQuery;
+    procedure Image1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormRelogioLogin: TFormRelogioLogin;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFormRelogioLogin.FormShow(Sender: TObject);
+begin
+  inherited;
+              PainelRelogio.left:=Trunc((FormRelogio.width - PainelRelogio.Width) / 2);
+              PainelRelogio.top:=Trunc((FormRelogio.Height - PainelRelogio.Height) / 2);
+
+end;
+
+procedure TFormRelogioLogin.Image1Click(Sender: TObject);
+begin
+  inherited;
+//ooio
+end;
+
+end.

@@ -1,0 +1,152 @@
+unit UnitLctoLote;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ComCtrls, Buttons, ExtCtrls, DBCtrls, DB, ADODB, Gauges;
+
+type
+  TFormLctoLote = class(TForm)
+    Panel2: TPanel;
+    SpeedButton2: TSpeedButton;
+    Label1: TLabel;
+    DtIni: TDateTimePicker;
+    QrEventos: TADOQuery;
+    DtEventos: TDataSource;
+    DBLookupComboBox1: TDBLookupComboBox;
+    QrPerfil: TADOQuery;
+    DtPerfil: TDataSource;
+    DBLookupComboBox2: TDBLookupComboBox;
+    Label4: TLabel;
+    Label2: TLabel;
+    DtPeriodo: TDataSource;
+    QrTemp1: TADOQuery;
+    Gauge1: TGauge;
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormLctoLote: TFormLctoLote;
+
+implementation
+
+uses UnitPai, UnitProDisp;
+
+{$R *.dfm}
+
+procedure TFormLctoLote.FormCreate(Sender: TObject);
+begin
+             DtEventos.DataSet.Open;
+             DtPerfil.DataSet.Open;
+             DtIni.Date:=now;
+end;
+
+procedure TFormLctoLote.SpeedButton2Click(Sender: TObject);
+var     Q: tadoquery;
+VInicioPeriodo,VFimPeriodo, VDia : Tdate;
+VCodPerfil, VcodEvento : word;
+begin
+             Q:=tadoquery.create(nil);
+             Q.Connection:=Pai.Genoma;
+             VInicioPeriodo:=StrToDate(Copy(DtPeriodo.DataSet.FieldByName('Tpe_inicio').AsString,1,10));
+             VFimPeriodo   :=StrToDate(Copy(DtPeriodo.DataSet.FieldByName('Tpe_Fim').AsString,1,10));
+             VDia          :=DtIni.Date;
+             if DBLookupComboBox1.KeyValue <> Null then
+                   begin
+                   VCodPerfil:=DBLookupComboBox1.KeyValue;
+                   end
+                   else
+                   begin
+                         ShowMessage('É necessário escolher um Perfil');
+                         Abort;
+                   end;
+             if DBLookupComboBox2.KeyValue <> Null then
+                   begin
+                   VcodEvento:=DBLookupComboBox2.KeyValue;
+                   end
+                   else
+                   begin
+                         ShowMessage('É necessário escolher um EVENTO');
+                         Abort;
+                   end;
+             if (VDia >= VInicioPeriodo) and (VDia <= VFimPeriodo) then
+                   begin
+              MessageBox(0, '**** Movimento em Lote - Será gravado apenas para os colaboradores que não possuem nenhum registro na data informada ,'+#13+#10+''+#13+#10+'Caso já existam lançamentos para esta data, eles NÃO SERÃO ALTERADOS!', 'Atenção', MB_ICONWARNING or MB_OK);
+                          if (MessageDlg('Todos os lançamentos Normais deste dia, serão convertidos para FERIADO!'+#13+#10+''+#13+#10+'Você confirma este procedimento?', mtConfirmation, [mbYes, mbNo], 0) = mrYes) then
+                               begin
+                                   With QrTemp1 do
+                                         begin
+                                              Close;
+                                              Parameters.ParamByName('Perfil').Value:=VCodPerfil;
+                                              Parameters.ParamByName('Coligadea').Value:=Pai.QrColigadas.FieldByName('cod_coligada').AsString;
+                                              Open;
+                                              Gauge1.MaxValue:=RecordCount;
+                                              if Not eof then
+                                                   begin
+                                                          repeat
+                                                                Q.close;
+                                                                q.SQL.Clear;
+                                                                q.SQL.Add('select * from tb_ptomov where Pto_data = ' + QuotedStr(DateToStr(DtIni.Date)));
+                                                                q.SQL.Add('And Pto_Chapa = ' + QrTemp1.FieldByName('cod_pro').AsString);
+                                                                Open;
+                                                                if eof then
+                                                                        begin
+                                                                               // Se não hover lançamento, então ele grava
+                                                                               Pai.JorEntrada     :=0; Pai.JorSaida:=0; Pai.JorIti:=0; Pai.JorItf:=0; Pai.JorIntervalo:=0;
+                                                                               Pai.PtoCod         :=Pai.GeraSeq('PtoMov');
+                                                                               Pai.SqlChapa       :=QrTemp1.FieldByName('cod_pro').AsString;
+                                                                               Pai.PtoUsuario     :=Pai.Qrusuarios.FieldByName('Usu_Codigo').AsInteger;
+                                                                               Pai.PtoPeriodo     :=DtPeriodo.DataSet.FieldByName('Tpe_Cod').AsInteger;
+                                                                               Pai.PtoEvento      :=VcodEvento;
+                                                                               Pai.PtoFun         :=QrTemp1.FieldByName('CodPerfil').AsInteger;
+                                                                               Pai.JorLocal       :='NULL';
+                                                                               Pai.JorMatricula   :=QrTemp1.FieldByName('Chapa').AsString;
+                                                                               Pai.JorSaldo       :=QrTemp1.FieldByName('Jornada').AsString;
+                                                                               Pai.JorRef         :=1; //Pai.GeraRef(Pai.JorSaldo); // Funcao caucula ref do total de hoars da linah jornada, diferente do saldo de horas do movimento
+                                                                               Pai.PtoData:=VDia;
+                                                                               Pai.InserirMov1Click(nil);
+                                                                        end;
+
+                                                          next;
+                                                          until Eof;
+                                                   end;
+
+                                         end;
+
+
+
+
+
+
+
+
+
+
+
+
+                                    With Q do
+                                          begin
+                                                Close;
+                                                Sql.Clear;
+                                                Sql.Add('Update tb_ptoMov set Pto_Evento = 13 where Pto_Evento = 1 and Pto_data = ' + QuotedStr(DateToStr(VDiaFeriado)));
+                                                Sql.Add('And Pto_Coligada = ' + QuotedStr(Pai.QrColigadas.FieldByName('cod_coligada').AsString));
+                                                ExecSQL;
+                                                MessageBox(0, 'A conversão foi realizada com sucesso, verifique!', 'Sucesso', MB_ICONINFORMATION or MB_OK);
+                                                MessageBox(0, 'Esta ação só poderá ser revertida na tela de disponibilidade de Mão de obra!'+#13+#10+''+#13+#10+'Caso necessite, realize este procedimento nos demais perfis/funções!', 'Relembre', MB_ICONASTERISK or MB_OK);
+                                          end;
+                               end;
+
+                   end
+                   Else
+                   MessageBox(0, 'Data está fora do período ativo, Verifique', 'Data incorreta!', MB_ICONWARNING or MB_OK);
+
+
+end;
+
+end.

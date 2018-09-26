@@ -1,0 +1,653 @@
+object FormProventos: TFormProventos
+  Left = 380
+  Top = 152
+  Width = 271
+  Height = 298
+  ActiveControl = DataInicial
+  BorderIcons = [biSystemMenu]
+  Caption = 'Proventos e Descontos'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsStayOnTop
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnActivate = FormActivate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 263
+    Height = 264
+    Align = alClient
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 27
+      Top = 25
+      Width = 53
+      Height = 13
+      Caption = 'Data Inicial'
+    end
+    object Label2: TLabel
+      Left = 145
+      Top = 26
+      Width = 48
+      Height = 13
+      Caption = 'Data Final'
+    end
+    object SpeedButton1: TSpeedButton
+      Left = 33
+      Top = 148
+      Width = 97
+      Height = 49
+      Glyph.Data = {
+        F6060000424DF606000000000000360000002800000018000000180000000100
+        180000000000C0060000120B0000120B00000000000000000000FF00FFFF00FF
+        FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF0082BF0081BD0082BF0082
+        BF0080BC0082BFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+        00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF008CCA0098D300A6E1
+        00ADE700ABE500A6E000A0DA0099D1008CC6007FB8FF00FFFF00FFFF00FFFF00
+        FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF0091CF00A5DD00
+        C5F700C9F700BDEB00B4E200ACD800A7D300A1D000A1D0009ECE0099D0008BC1
+        0079B0FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF0098
+        D500BCED00D8FF00D1FC00C9F700BFE9049AC10975920A6D880680A502A4D100
+        ACE000A3D5009ECB0090C10078ACFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+        FF00FF009CD900C4F000E0FF00D5FF00D9FF02BDDD105D6E23191925110F2411
+        0F25110F19333A078AB000B8ED00ADE700A1D00093C40076AAFF00FFFF00FFFF
+        00FFFF00FFFF00FF009CD900C1EF00E6FF00D9FF00DDFF04B1CA183B4124110F
+        201B1C1F20221F2022201F202315132218180D658001B8ED00B7F200A9DA0090
+        C20072A6FF00FFFF00FFFF00FFFF00FF00B1E700E9FF00E0FF00E5FF03BBD119
+        353B250E0D1F1F221F20221F1F211F1F211F1F211F21232319192411100D6680
+        00BBF400B7F600A9DA0084B7FF00FFFF00FFFF00FF00A3E200D4F700EFFF00E9
+        FF01DAEA12555E260D0C201F201F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1F1E1F1F
+        2022231919231614087FA300C1FB00B7F2009ED40078ACFF00FFFF00FF00B0EA
+        00EBFF00EBFF00EDFB0898A4241212231616211C1C211A1B211A1B211A1B211A
+        1B211A1B211A1B211A1B211C1D25100D1D272C03A1CE00BFFC00B1E70086BCFF
+        00FF00ADEF00C1EF00F6FF00EFFF00E6F609909F13525A10646F10606C10606C
+        10606C105D6C105D6C105D6C105B6C105B6C105A6D105A6D134A590591BC00C1
+        FB00BBF40099D00086C400ABED01CFF006F8FF02EFFF00EBFF00EFFF00F8FF00
+        F4FF00F0FF00EFFF00EBFF00E9FF00E6FF00E5FF00E0FF00DDFF00D9FF00D8FF
+        00D5FF00C5FF00C1FF00C1FB00AAE6007EB700ABED0CD9F729FCFF0FF3FF00F0
+        FF00EFFF00EBFF00F0FF00FBFF00EFFF00E2FF00E0FF00DDFF00D9FF00D8FF00
+        E2FF00E2FF00D0FF00CEFF00C9FF00C4FF00C5FF00B1F20082BF00ADEF17DCF8
+        66FEFF32F6FF00F4FF00EFFF00F0FF00E6F604BFC402D4E500EBFF00DDFF00DD
+        FF00DDFF00E0FF03B6D303B2CE00D1FC00CEFF00CBFF00C9FF00C9FF00B6F300
+        86C400B0F21FDCFB8CFEFF66FEFF03F4FF00F8FF01EDF20C80891F2326115F68
+        01DAEA00EFFF00DDFF00EBFF04B1CA173F461C2B30069AB600D4FB00CEFF00CB
+        FF00CBFF00B6EF0086C400ADEF16CFF893FEFFA7FCFF1EF8FF00FFFF03CFD01C
+        2D302807071F222407A1AC00FBFF00E6FF00F4FF0E6A7623161628090712535F
+        01CFF000D5FF00CEFF00D0FF00ABE50086C4FF00FF0AC1F875FBFFD1FFFF78FE
+        FF03FFFF04BFC41F1F222314161F1F1F0A8F9700FFFF00EBFF00F0FF12576221
+        191A23131216414802C9E300D8FF00D0FF00D3FF009AD7FF00FFFF00FF0AC1F8
+        3BE6FCCAFFFFD9FFFF50FFFF03D8D718383A2A01021E242806B6BA00FFFF00E9
+        FF00FBFF0C7A8423131528050410646F01D7F000D9FF00D9FF00C5F70091CFFF
+        00FFFF00FFFF00FF10C9FB82FBFFE9FFFFD1FFFF56FBFB11B2B5154E4F0A8B91
+        00F2F300F4FF00EBFF00F4FF02D4E50F656E13545C03BBD100E0FF00DDFF00DD
+        FF00A6E0FF00FFFF00FFFF00FFFF00FF0AC1F825DAFBB5FFFFF3FFFFDEFFFF78
+        FEFF1DEBED01F3F400FBFF00F0FF00F0FF00EBFF00EFFF01E1ED02DDEB00E5FF
+        00E2FF00E9FF00BDEB0098D5FF00FFFF00FFFF00FFFF00FFFF00FF06C0FC3BE6
+        FCBCFFFFF3FFFFEEFFFFB7FFFF72FFFF3DFBFF1EF8FF13F4FF13F4FF1DEFFF27
+        F3FF1DEFFF09EDFF00EBFF00C4F0009EDCFF00FFFF00FFFF00FFFF00FFFF00FF
+        FF00FFFF00FF06C0FC2DDCFC8CFEFFD9FFFFF0FFFFEEFFFFDEFFFFCAFFFFB5FF
+        FFA7FCFF93FEFF6EF8FF32F6FF09EDFF00C1EF00A1DEFF00FFFF00FFFF00FFFF
+        00FFFF00FFFF00FFFF00FFFF00FFFF00FF10C9FB10C9FB3FE6FC82FBFFAFFFFF
+        C4FFFFC4FFFFB5FFFF99FFFF66FEFF2FF2FC0CD9F700B2EA00B2EAFF00FFFF00
+        FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF06
+        C0FC0AC1F816CFF81FDCFB24E1FB24E1FB17DCF807C5F002B5EE02B5EEFF00FF
+        FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+        FFFF00FFFF00FFFF00FFFF00FF00B4F400B4F400B4F400B1F200B0F200B4F4FF
+        00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
+      OnClick = SpeedButton1Click
+    end
+    object SpeedButton2: TSpeedButton
+      Left = 137
+      Top = 148
+      Width = 97
+      Height = 49
+      Glyph.Data = {
+        F6060000424DF606000000000000360000002800000018000000180000000100
+        180000000000C0060000120B0000120B00000000000000000000FF00FFFF00FF
+        FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF0243030243030243030141
+        03013B03013B03FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+        00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF025205035A07046C0A
+        04760A04790B04790B04740A036708024D05013903FF00FFFF00FFFF00FFFF00
+        FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF035A06066A0D0C
+        8A180D9D1A0A991609981206920F05900D06920D05950E05950E05820C035706
+        013903FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF0460
+        090D871815AA2812A5230F9C1C0D98180B9616099212068F0F058C0D058C0D05
+        8C0D06920D06990E047609023F03FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+        FF00FF04690A0F8B1D1CB43316A62913A125119F210F9D1D0D99190B97160992
+        12068F0F058C0D058C0D058C0D058C0D069A0F04740A023F03FF00FFFF00FFFF
+        00FFFF00FFFF00FF046C0912972120B83D1AAC3218AA2E16A92C14A52812A323
+        109F1F0D9E1C0C981809961508911106900E058E0D058E0D058A0D069A0F0476
+        09013903FF00FFFF00FFFF00FFFF00FF09821325BC4522B63E1EB1381DB0371C
+        AD351AAB3017A92D14A428139F240F9D1F0D991B0B9616099212078E0F068C0E
+        058C0D058C0D06990E035706FF00FFFF00FFFF00FF04760A1CA7342AC44C23B8
+        4122B63F20B43C1D4F281C4E261B4C241A4B2118481F16471C15451A13431812
+        4116114113103F12068C0D058C0D06920D05820C013903FF00FFFF00FF098213
+        2BC14E29C04B25BC4523BB4126BD4525BC4523BA4120B63D1DB2371BAD3216A7
+        2B139D2511991F0D931A0C8C160A8312068C0F058E0D058C0D05950E024D05FF
+        00FF04820A12972134CC5C2DC14F29BF4B27BC4726BD4526BD4624BB4221B73E
+        1EB4391BAF3217AA2D14A527119F210E9C1C0B9816099613089212068F0F058C
+        0D05950E036708013B0304820A1CA7343ED06730C6572DC25028BF4A27BC4726
+        BB4524BA4222B63E1FB1391CAD3418AA2E15A52812A0230F9C1F0D981A0B9617
+        0A951509951307901005950E04750A013B0305870A2BB64550DA7A3ACB6030C6
+        572DC24F29BF4B28C04827C54723BC4120B23A1DB0361AAC3118A72D15A52811
+        A9240FA51F0E9C1C0C98190B9716099214079311057B0B014103058A0C38BB51
+        6DE39549D47333CB5C30C6572DC6522BC44E27A14226B24323BD4120B43C1DB0
+        361CAF3218AF2F16962814952611A322109F1F0D991B0C97180A9916077D0F02
+        4303058A0C38BB5186E9A966DD8A39CE6534CF5D31CA582A773F202924236432
+        26C04623BC4220B43C1EBC391D98331E3D241E2E2217842612A423109F1F0F9C
+        1C0D9D1A077D0F02430304820A27AD398CEBAF8CE7AA49D47338D76431B25422
+        30281D0B19202824279F4227CA4823B84121C640205F2D1F1820200B1D1C4E25
+        15A12813A423119D200FA41F076F0F024303FF00FF169C217AE199B0F0C674E3
+        983FDC6D319E501E1A1F1F181E2023232889402BD35026C04624C2431F502A1F
+        1C1F1F161F1E3C2418A12C15AA2813A12512A423046009FF00FFFF00FF0A9012
+        49C664B5F2CAAFEFC463E38B3DBF5C2230281A0615202824319E502ED35629C0
+        4B28CE4A2363321F181E200B1D1F502A1CAC3118AC2D18AC2D0F921F025205FF
+        00FFFF00FFFF00FF18A02686E9A9CCF6DCACEFC266DD8A319E502230282A773F
+        34CF5D31CA582DC2502BCA4E27AB4322482C213C282197371EB2361CAF331CB4
+        33076F0FFF00FFFF00FFFF00FFFF00FF0A901235B84AA0EFBBD5F7E1B5F2CA74
+        E39849D47339CE6536D16233CB5C30C6572DC6532BC44E28B54626B24324B742
+        20B43C23BB40108E20035B06FF00FFFF00FFFF00FFFF00FFFF00FF0A901238BB
+        51A3EFBFD7F8E2CCF6DCA0EFBB76E69957DA7F49D4733ED0673ECB633ECB6341
+        CE633CC95B2DC14F2AC44C139124046609FF00FFFF00FFFF00FFFF00FFFF00FF
+        FF00FFFF00FF0A901235B84D86E9A9C0F6D4D5F7E1CAF4D9B5F2CA9FEBB78CE7
+        AA84E5A17AE19969D9874FD37335C957159527046C0AFF00FFFF00FFFF00FFFF
+        00FFFF00FFFF00FFFF00FFFF00FFFF00FF0A901218A0264BC66784E5A1A3EFBF
+        B0F0C6B1F2C9A7F0C192EAAF74E3984FD3732AB1400D8718046E09FF00FFFF00
+        FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF0A
+        9012169C212AB1403DBF5C49C66444C26035B84D1FA1310C8A1804790BFF00FF
+        FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+        FFFF00FFFF00FFFF00FFFF00FF058A0C058A0C058A0C04870B04820A04820AFF
+        00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
+      OnClick = SpeedButton2Click
+    end
+    object s: TLabel
+      Left = 40
+      Top = 96
+      Width = 2
+      Height = 13
+      Caption = #39
+      Visible = False
+    end
+    object Gauge1: TGauge
+      Left = 13
+      Top = 205
+      Width = 241
+      Height = 48
+      ForeColor = 16711808
+      MaxValue = 300
+      Progress = 0
+    end
+    object Label3: TLabel
+      Left = 32
+      Top = 124
+      Width = 84
+      Height = 13
+      Caption = 'Nome p/ Arquivo:'
+    end
+    object DBText1: TDBText
+      Left = 344
+      Top = 136
+      Width = 65
+      Height = 17
+      DataField = 'HORA_DIARIA'
+      DataSource = DataSource2
+    end
+    object DataInicial: TCJVEditDate
+      Left = 25
+      Top = 40
+      Width = 102
+      Height = 27
+      AutoSelect = False
+      Color = 13303754
+      EditMask = '!99/99/0000;1;_'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clNavy
+      Font.Height = -16
+      Font.Name = 'Calibri'
+      Font.Style = []
+      MaxLength = 10
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 0
+      Text = '21/12/2009'
+      OnKeyPress = DataInicialKeyPress
+      Data = 40168.000000000000000000
+    end
+    object DataFinal: TCJVEditDate
+      Left = 143
+      Top = 40
+      Width = 102
+      Height = 27
+      AutoSelect = False
+      Color = 13303754
+      EditMask = '!99/99/0000;1;_'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clNavy
+      Font.Height = -16
+      Font.Name = 'Calibri'
+      Font.Style = []
+      MaxLength = 10
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 1
+      Text = '21/12/2009'
+      Data = 40168.000000000000000000
+    end
+    object BitBtn1: TBitBtn
+      Left = 160
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = 'BitBtn1'
+      TabOrder = 2
+      Visible = False
+    end
+    object RadioGroup1: TRadioGroup
+      Left = 49
+      Top = 77
+      Width = 178
+      Height = 37
+      Caption = '  Destino  '
+      Columns = 2
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Calibri'
+      Font.Style = [fsItalic]
+      ItemIndex = 0
+      Items.Strings = (
+        'A:\'
+        'C:\')
+      ParentFont = False
+      TabOrder = 3
+    end
+    object Edit1: TEdit
+      Left = 121
+      Top = 120
+      Width = 68
+      Height = 21
+      TabOrder = 4
+      Text = 'stazita.txt'
+    end
+  end
+  object Query1: TQuery
+    Active = True
+    DatabaseName = 'mArKeYtOR'
+    SQL.Strings = (
+      'select * from MM_diario M, Funcionario F, MK_Funcao E'
+      'Where M.matricula = F.Matricula and F.funcao = E.codigo'
+      'order by M.matricula , M.dia_mes_ano;')
+    Left = 232
+    Top = 16
+    object Query1Matricula: TStringField
+      FieldName = 'Matricula'
+      Origin = 'MARKEYTOR."MM_diario.DB".Matricula'
+      Size = 4
+    end
+    object Query1Seq: TIntegerField
+      FieldName = 'Seq'
+      Origin = 'MARKEYTOR."MM_diario.DB".Seq'
+    end
+    object Query1DIA_MES_ANO: TDateField
+      FieldName = 'DIA_MES_ANO'
+      Origin = 'MARKEYTOR."MM_diario.DB".DIA_MES_ANO'
+    end
+    object Query1ENTRADA: TStringField
+      FieldName = 'ENTRADA'
+      Origin = 'MARKEYTOR."MM_diario.DB".ENTRADA'
+      Size = 5
+    end
+    object Query1INICIO_INTERVALO: TStringField
+      FieldName = 'INICIO_INTERVALO'
+      Origin = 'MARKEYTOR."MM_diario.DB".INICIO_INTERVALO'
+      Size = 5
+    end
+    object Query1FIM_INTERVALO: TStringField
+      FieldName = 'FIM_INTERVALO'
+      Origin = 'MARKEYTOR."MM_diario.DB".FIM_INTERVALO'
+      Size = 5
+    end
+    object Query1SAIDA: TStringField
+      FieldName = 'SAIDA'
+      Origin = 'MARKEYTOR."MM_diario.DB".SAIDA'
+      Size = 5
+    end
+    object Query1TOTAL: TStringField
+      FieldName = 'TOTAL'
+      Origin = 'MARKEYTOR."MM_diario.DB".TOTAL'
+      Size = 6
+    end
+    object Query1TIPO_DIA: TStringField
+      FieldName = 'TIPO_DIA'
+      Origin = 'MARKEYTOR."MM_diario.DB".TIPO_DIA'
+      Size = 1
+    end
+    object Query1Total_intervalo: TStringField
+      FieldName = 'Total_intervalo'
+      Origin = 'MARKEYTOR."MM_diario.DB".Total_intervalo'
+      Size = 5
+    end
+    object Query1Dia_Mes_Ano1: TStringField
+      FieldName = 'Dia_Mes_Ano1'
+      Origin = 'MARKEYTOR."MM_diario.DB".Dia_Mes_Ano1'
+      Size = 10
+    end
+    object Query1MATRICULA_1: TStringField
+      FieldName = 'MATRICULA_1'
+      Origin = 'MARKEYTOR."MM_diario.DB".Dia_Mes_Ano1'
+      Size = 4
+    end
+    object Query1FUNCAO: TStringField
+      FieldName = 'FUNCAO'
+      Origin = 'MARKEYTOR."MM_diario.DB".Dia_Mes_Ano1'
+      Size = 2
+    end
+    object Query1OPERAVEICULO: TBooleanField
+      FieldName = 'OPERAVEICULO'
+      Origin = 'MARKEYTOR."MM_diario.DB".Dia_Mes_Ano1'
+    end
+    object Query1Nome: TStringField
+      FieldName = 'Nome'
+      Origin = 'MARKEYTOR."MM_diario.DB".Dia_Mes_Ano1'
+      Size = 50
+    end
+    object Query1SITUACAO: TStringField
+      FieldName = 'SITUACAO'
+      Origin = 'MARKEYTOR."MM_diario.DB".Dia_Mes_Ano1'
+      Size = 1
+    end
+    object Query1CODIGO: TStringField
+      FieldName = 'CODIGO'
+      Origin = 'MARKEYTOR."MM_diario.DB".Dia_Mes_Ano1'
+      Size = 2
+    end
+    object Query1DESCRICAO: TStringField
+      FieldName = 'DESCRICAO'
+      Origin = 'MARKEYTOR."MM_diario.DB".Dia_Mes_Ano1'
+      Size = 25
+    end
+    object Query1HORA_DIARIA: TStringField
+      FieldName = 'HORA_DIARIA'
+      Origin = 'MARKEYTOR."MM_diario.DB".Dia_Mes_Ano1'
+      Size = 5
+    end
+    object Query1COMPESA: TBooleanField
+      FieldName = 'COMPESA'
+      Origin = 'MARKEYTOR."MM_diario.DB".Dia_Mes_Ano1'
+    end
+    object Query1OPERA_VEICULO: TBooleanField
+      FieldName = 'OPERA_VEICULO'
+      Origin = 'MARKEYTOR."MM_diario.DB".Dia_Mes_Ano1'
+    end
+    object Query1REDUCAO_INTERVALO: TStringField
+      FieldName = 'REDUCAO_INTERVALO'
+      Origin = 'MARKEYTOR."MM_diario.DB".Dia_Mes_Ano1'
+      Size = 5
+    end
+    object Query1LIMITE_HORAS: TStringField
+      FieldName = 'LIMITE_HORAS'
+      Origin = 'MARKEYTOR."MM_diario.DB".Dia_Mes_Ano1'
+      Size = 5
+    end
+  end
+  object Query2: TQuery
+    Active = True
+    DatabaseName = 'mArKeYtOR'
+    SQL.Strings = (
+      'Select * from Diretriz;')
+    Left = 232
+    Top = 48
+    object Query2Sequencial: TIntegerField
+      FieldName = 'Sequencial'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".Sequencial'
+    end
+    object Query2COM_PRIMEIRA: TDateField
+      FieldName = 'COM_PRIMEIRA'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".COM_PRIMEIRA'
+    end
+    object Query2COM_SEGUNDA: TDateField
+      FieldName = 'COM_SEGUNDA'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".COM_SEGUNDA'
+    end
+    object Query2COM_TERCEIRA: TDateField
+      FieldName = 'COM_TERCEIRA'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".COM_TERCEIRA'
+    end
+    object Query2COM_QUARTA: TDateField
+      FieldName = 'COM_QUARTA'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".COM_QUARTA'
+    end
+    object Query2COM_QUINTA: TDateField
+      FieldName = 'COM_QUINTA'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".COM_QUINTA'
+    end
+    object Query2JORNADA_MAXIMA: TStringField
+      FieldName = 'JORNADA_MAXIMA'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".JORNADA_MAXIMA'
+      Size = 5
+    end
+    object Query2INICIO_ADCIONAL: TStringField
+      FieldName = 'INICIO_ADCIONAL'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".INICIO_ADCIONAL'
+      Size = 5
+    end
+    object Query2FIM_ADCIONAL: TStringField
+      FieldName = 'FIM_ADCIONAL'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".FIM_ADCIONAL'
+      Size = 5
+    end
+    object Query2INTERVALO_TIPO: TStringField
+      FieldName = 'INTERVALO_TIPO'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".INTERVALO_TIPO'
+      Size = 1
+    end
+    object Query2PERIODO_INICIAL: TDateField
+      FieldName = 'PERIODO_INICIAL'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".PERIODO_INICIAL'
+    end
+    object Query2PERIODO_FINAL: TDateField
+      FieldName = 'PERIODO_FINAL'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".PERIODO_FINAL'
+    end
+    object Query2FERIADO: TStringField
+      FieldName = 'FERIADO'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".FERIADO'
+      Size = 3
+    end
+    object Query2FALTA: TStringField
+      FieldName = 'FALTA'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".FALTA'
+      Size = 3
+    end
+    object Query2SUSPENSAO: TStringField
+      FieldName = 'SUSPENSAO'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".SUSPENSAO'
+      Size = 3
+    end
+    object Query2HORAEXTRA: TStringField
+      FieldName = 'HORAEXTRA'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".HORAEXTRA'
+      Size = 3
+    end
+    object Query2REFLEXOEXTRA: TStringField
+      FieldName = 'REFLEXOEXTRA'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".REFLEXOEXTRA'
+      Size = 3
+    end
+    object Query2ADICIONAL: TStringField
+      FieldName = 'ADICIONAL'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".ADICIONAL'
+      Size = 3
+    end
+  end
+  object XPManifest1: TXPManifest
+    Left = 16
+    Top = 88
+  end
+  object Query3: TQuery
+    DatabaseName = 'mArKeYtOR'
+    SQL.Strings = (
+      'select * from Funcionario'
+      'order by matricula;')
+    Left = 8
+    object Query3MATRICULA: TStringField
+      FieldName = 'MATRICULA'
+      Origin = 'MARKEYTOR."Funcionario.DB".MATRICULA'
+      Size = 4
+    end
+    object Query3FUNCAO: TStringField
+      FieldName = 'FUNCAO'
+      Origin = 'MARKEYTOR."Funcionario.DB".FUNCAO'
+      Size = 2
+    end
+  end
+  object Query4: TQuery
+    Active = True
+    DatabaseName = 'mArKeYtOR'
+    SQL.Strings = (
+      'select * from diretriz;')
+    Left = 64
+    Top = 65528
+    object Query4Sequencial: TIntegerField
+      FieldName = 'Sequencial'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".Sequencial'
+    end
+    object Query4COM_PRIMEIRA: TDateField
+      FieldName = 'COM_PRIMEIRA'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".COM_PRIMEIRA'
+    end
+    object Query4COM_SEGUNDA: TDateField
+      FieldName = 'COM_SEGUNDA'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".COM_SEGUNDA'
+    end
+    object Query4COM_TERCEIRA: TDateField
+      FieldName = 'COM_TERCEIRA'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".COM_TERCEIRA'
+    end
+    object Query4COM_QUARTA: TDateField
+      FieldName = 'COM_QUARTA'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".COM_QUARTA'
+    end
+    object Query4COM_QUINTA: TDateField
+      FieldName = 'COM_QUINTA'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".COM_QUINTA'
+    end
+    object Query4JORNADA_MAXIMA: TStringField
+      FieldName = 'JORNADA_MAXIMA'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".JORNADA_MAXIMA'
+      Size = 5
+    end
+    object Query4INICIO_ADCIONAL: TStringField
+      FieldName = 'INICIO_ADCIONAL'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".INICIO_ADCIONAL'
+      Size = 5
+    end
+    object Query4FIM_ADCIONAL: TStringField
+      FieldName = 'FIM_ADCIONAL'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".FIM_ADCIONAL'
+      Size = 5
+    end
+    object Query4INTERVALO_TIPO: TStringField
+      FieldName = 'INTERVALO_TIPO'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".INTERVALO_TIPO'
+      Size = 1
+    end
+    object Query4PERIODO_INICIAL: TDateField
+      FieldName = 'PERIODO_INICIAL'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".PERIODO_INICIAL'
+    end
+    object Query4PERIODO_FINAL: TDateField
+      FieldName = 'PERIODO_FINAL'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".PERIODO_FINAL'
+    end
+    object Query4FERIADO: TStringField
+      FieldName = 'FERIADO'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".FERIADO'
+      Size = 3
+    end
+    object Query4FALTA: TStringField
+      FieldName = 'FALTA'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".FALTA'
+      Size = 3
+    end
+    object Query4SUSPENSAO: TStringField
+      FieldName = 'SUSPENSAO'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".SUSPENSAO'
+      Size = 3
+    end
+    object Query4HORAEXTRA: TStringField
+      FieldName = 'HORAEXTRA'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".HORAEXTRA'
+      Size = 3
+    end
+    object Query4REFLEXOEXTRA: TStringField
+      FieldName = 'REFLEXOEXTRA'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".REFLEXOEXTRA'
+      Size = 3
+    end
+    object Query4ADICIONAL: TStringField
+      FieldName = 'ADICIONAL'
+      Origin = 'MARKEYTOR."DIRETRIZ.DB".ADICIONAL'
+      Size = 3
+    end
+  end
+  object Table1: TTable
+    DatabaseName = 'mArKeYtOR'
+    TableName = 'REL_PROVENTO.db'
+    Left = 232
+    Top = 112
+    object Table1Matricula: TStringField
+      FieldName = 'Matricula'
+      Size = 5
+    end
+    object Table1HORAEXTRA: TStringField
+      FieldName = 'HORAEXTRA'
+      Size = 5
+    end
+    object Table1ADICIONAL: TStringField
+      FieldName = 'ADICIONAL'
+      Size = 5
+    end
+    object Table1FERIADO: TStringField
+      FieldName = 'FERIADO'
+      Size = 5
+    end
+    object Table1FALTA: TStringField
+      FieldName = 'FALTA'
+      Size = 5
+    end
+    object Table1REFLEXO: TStringField
+      FieldName = 'REFLEXO'
+      Size = 5
+    end
+    object Table1SUSPENSAO: TStringField
+      FieldName = 'SUSPENSAO'
+      Size = 5
+    end
+    object Table1NOME: TStringField
+      FieldName = 'NOME'
+      Size = 50
+    end
+    object Table1FUNCAO: TStringField
+      FieldName = 'FUNCAO'
+      Size = 50
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = Table1
+    Left = 232
+    Top = 136
+  end
+  object DataSource2: TDataSource
+    DataSet = Query1
+    Left = 240
+    Top = 32
+  end
+end

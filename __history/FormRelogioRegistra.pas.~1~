@@ -1,0 +1,24 @@
+unit FormRelogioRegistra;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, UnitRelogio, DB, ADODB, ExtCtrls, StdCtrls;
+
+type
+  TFormRelogio3 = class(TFormRelogio)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormRelogio3: TFormRelogio3;
+
+implementation
+
+{$R *.dfm}
+
+end.

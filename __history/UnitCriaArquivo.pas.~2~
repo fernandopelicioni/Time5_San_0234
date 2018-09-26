@@ -1,0 +1,88 @@
+unit UnitCriaArquivo;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Gauges, StdCtrls, Buttons, ExtCtrls, DB, ADODB;
+
+type
+  TFormCriaArquivo = class(TForm)
+    Panel1: TPanel;
+    Label2: TLabel;
+    SpeedButton2: TSpeedButton;
+    Edit2: TEdit;
+    Memo1: TMemo;
+    Gauge2: TGauge;
+    Label4: TLabel;
+    OpenDialog1: TOpenDialog;
+    QrProventos: TADOQuery;
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormCriaArquivo: TFormCriaArquivo;
+   ArqTxt,TXT : TextFile;
+implementation
+
+uses UnitPai;
+
+{$R *.dfm}
+
+procedure TFormCriaArquivo.FormActivate(Sender: TObject);
+begin
+edit2.text:='C:\Genoma\'+copy(Pai.QrColigadas.FieldByName('des_Coligada').AsString,1,4) + '.TXT';
+end;
+
+procedure TFormCriaArquivo.SpeedButton2Click(Sender: TObject);
+VAR
+IPos,Evento, Registro: integer;
+minuto,Hora : Real;
+Referencia,Saida,Fracao, Entrada, Complemento, Horas : String;
+begin
+Screen.Cursor:=CrHourGlass;
+            // Inicia Gravação
+            Memo1.Lines.Add('Iniciando Gravação');
+            AssignFile(ArqTxt, Edit2.text);
+            Rewrite(ArqTxt);
+            With QrProventos do
+                 Begin
+                      Close;
+                      Open;
+                      First;
+                      Gauge2.MaxValue:=RecordCount;
+                      if not eof then
+                            begin
+                                   repeat
+                                          DecimalSeparator:='.';
+                                          Gauge2.Progress:=Gauge2.Progress+1;
+                                          Memo1.Lines.Add('Gravando : '+ FormatFloat('000000',QrProventos.FieldByName('Chapa').AsInteger));
+                                          Saida:=
+                                          FormatFloat('000000',QrProventos.FieldByName('CHAPA').AsInteger) +
+                                          '                  '  +
+                                          FormatFloat('0000',QrProventos.FieldByName('CODEXP').AsInteger) +
+                                          QrProventos.FieldByName('HORA').AsString +
+                                          FormatFloat('000000000000.00',QrProventos.FieldByName('REFERENCIA').value) + '000000000000.00000000000000.00N';
+                                          Memo1.Lines.Add(saida);
+                                          Writeln(ArqTxt, Saida);
+                                          NEXT;
+                                   until Eof;
+                                   CloseFile(Arqtxt);
+                                   memo1.Lines.Add('Gravação Concluida');
+                                   ShowMessage('Você ja pode utilizar o arquivo GERADO!');
+                            end;
+                 End;
+
+
+                                         DecimalSeparator:=',';
+
+Screen.Cursor:=CrDefault;
+
+end;
+
+end.

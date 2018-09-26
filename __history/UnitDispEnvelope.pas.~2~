@@ -1,0 +1,60 @@
+unit UnitDispEnvelope;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, ADODB, ExtCtrls, Grids, DBGrids, StdCtrls, Mask, DBCtrls, Buttons;
+
+type
+  TFormDispEnvelope = class(TForm)
+    Panel1: TPanel;
+    DtEnvelope: TDataSource;
+    QrEnvelope: TADOQuery;
+    DBEdit1: TDBEdit;
+    DBEdit2: TDBEdit;
+    Panel2: TPanel;
+    DBGrid1: TDBGrid;
+    Label1: TLabel;
+    Label2: TLabel;
+    DBEdit3: TDBEdit;
+    GroupBox1: TGroupBox;
+    DBText1: TDBText;
+    DBText2: TDBText;
+    DBText3: TDBText;
+    Label3: TLabel;
+    Label4: TLabel;
+    BitBtn1: TBitBtn;
+    procedure FormActivate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    Vchapa:integer;
+    { Public declarations }
+  end;
+
+var
+  FormDispEnvelope: TFormDispEnvelope;
+
+implementation
+
+uses UnitPai, UnitProDisp;
+
+{$R *.dfm}
+
+procedure TFormDispEnvelope.FormActivate(Sender: TObject);
+begin
+          VChapa := FormProDisp.QrProDisp.FieldByName('Interno').AsInteger;
+          QrEnvelope.Parameters.ParamByName('Chapa').Value:=Vchapa;
+          DtEnvelope.DataSet.Open;
+end;
+
+procedure TFormDispEnvelope.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+          DtEnvelope.DataSet.Close;
+          Action:=cafree;
+end;
+
+end.

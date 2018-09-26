@@ -1,0 +1,99 @@
+object FormEtiquetaCartao: TFormEtiquetaCartao
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu]
+  Caption = 'FormEtiquetaCartao'
+  ClientHeight = 478
+  ClientWidth = 536
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -16
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  OldCreateOrder = False
+  OnActivate = FormActivate
+  OnClose = FormClose
+  PixelsPerInch = 96
+  TextHeight = 21
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 536
+    Height = 87
+    CustomHint = Pai.BalloonHint1
+    Align = alTop
+    Alignment = taLeftJustify
+    Caption = '  Etiquetas de Cart'#227'o de Ponto'
+    Color = 13012736
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -16
+    Font.Name = 'Segoe UI Light'
+    Font.Style = []
+    ParentBackground = False
+    ParentFont = False
+    TabOrder = 0
+    ExplicitWidth = 518
+  end
+  object GroupBox1: TGroupBox
+    Left = 8
+    Top = 97
+    Width = 495
+    Height = 200
+    Caption = 'Dados'
+    TabOrder = 1
+    object Label1: TLabel
+      Left = 24
+      Top = 34
+      Width = 103
+      Height = 21
+      Caption = 'Departamento:'
+    end
+    object Label2: TLabel
+      Left = 24
+      Top = 107
+      Width = 109
+      Height = 21
+      Caption = 'Matricula Inicial'
+    end
+    object Label3: TLabel
+      Left = 200
+      Top = 107
+      Width = 102
+      Height = 21
+      Caption = 'Matricula Final'
+    end
+    object DBLookupComboBox1: TDBLookupComboBox
+      Left = 24
+      Top = 56
+      Width = 335
+      Height = 29
+      KeyField = 'COD_DEPTO'
+      ListField = 'DES_DEPTO'
+      ListSource = DtDepto
+      TabOrder = 0
+    end
+    object Edit2: TEdit
+      Left = 24
+      Top = 131
+      Width = 147
+      Height = 29
+      TabOrder = 1
+      Text = '0000'
+    end
+    object Edit1: TEdit
+      Left = 200
+      Top = 131
+      Width = 145
+      Height = 29
+      TabOrder = 2
+      Text = '99999'
+    end
+  end
+  object DtDepto: TDataSource
+    DataSet = Pai.QrDepto
+    Left = 456
+    Top = 312
+  end
+end

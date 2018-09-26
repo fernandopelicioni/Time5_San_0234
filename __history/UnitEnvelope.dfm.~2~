@@ -1,0 +1,163 @@
+object FormEnvelope: TFormEnvelope
+  Left = 0
+  Top = 0
+  BorderStyle = bsNone
+  Caption = 'FormEnvelope'
+  ClientHeight = 581
+  ClientWidth = 536
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -16
+  Font.Name = 'Segoe UI Light'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  PixelsPerInch = 96
+  TextHeight = 21
+  object Image2: TImage
+    Left = 460
+    Top = 514
+    Width = 50
+    Height = 50
+    AutoSize = True
+    Picture.Data = {
+      0954506E67496D61676589504E470D0A1A0A0000000D49484452000000320000
+      003208060000001E3F88B1000002334944415478DAED998B51C24010868F0AA4
+      04AC403A20256005860AC00AC40A840AC40EB002930A900AC40E42057ABFD91B
+      9390C73D38EE2EC33FB3930799CD7EDCEEBD32603DD1C0750057104F4086DCEE
+      B8EDB9652183ECB88DB97D729BD13148909FC2794630DBD0418456DC1EFB0002
+      25DCEE9946DDF806021D0846A96E7C041142DD6CFA00C20864D6071008298654
+      3B840E02650493B80499D4DC4B549D9016DCD6B640C47423E236221BD37D1BC2
+      C089BA2975D1BA2008F481821F5B0AB84D27531B159021058FE61D3908BEAAD2
+      D44616E489006CA58B89FEA6365D20489B57E6267D54B46E0389092204A54D20
+      21417C739BD68184049102825B5605412DEC5C4727290C8C0B715105114B509F
+      756479D69456944510FC6833A5108018C0269A3EF614E7C95AA508F2C5F407BA
+      949C1F0A2FC1B169A5A73A6984DE589E4AB53E0548C4ED43C1297A8A2D59A211
+      942A08D6F2ABB60704081E9A4BFE2B1BCDE07540908E5399F70990AEB442EAA0
+      598DF79F1440500F1193DC8810206D8E3B9BD50248A96B95050175537D286D00
+      9C01E44800CAEF6C03B105D104D2D8B5CA822C593E4D2F4AB9690D41DE09427B
+      43BB0E04CD3B32712A21F8BEA1F3678AC14875206771DC2174A931CB3B91E41C
+      0EAB2097680D2B02086AE185AE31E0C5AE83D20589D87FAF65B3A7BA28C82DEB
+      D89AF455D5913DD88FA32270143706A2C87540A620091D8307591244F0205382
+      B0392DB908C8902096AE033205816216E8185205417A197DB4F70524685D417C
+      D32FDDC082B3865DA4520000000049454E44AE426082}
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 536
+    Height = 57
+    Align = alTop
+    Alignment = taLeftJustify
+    Caption = '   Resumo de Pronventos e Descontos | Per'#237'odo'
+    Color = 14129920
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWhite
+    Font.Height = -19
+    Font.Name = 'Segoe UI Light'
+    Font.Style = []
+    ParentBackground = False
+    ParentFont = False
+    TabOrder = 0
+    ExplicitWidth = 550
+  end
+  object Panel2: TPanel
+    Left = 13
+    Top = 80
+    Width = 497
+    Height = 409
+    Enabled = False
+    TabOrder = 1
+    object DBText1: TDBText
+      Left = 104
+      Top = 16
+      Width = 297
+      Height = 17
+      DataField = 'Nome'
+      DataSource = DtEnvelope
+    end
+    object DBText2: TDBText
+      Left = 40
+      Top = 16
+      Width = 50
+      Height = 17
+      DataField = 'Chapa'
+      DataSource = DtEnvelope
+    end
+    object DBGrid1: TDBGrid
+      Left = 8
+      Top = 48
+      Width = 473
+      Height = 345
+      DataSource = DtEnvelope
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -16
+      TitleFont.Name = 'Segoe UI Light'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'NOMEEVENTO'
+          Title.Caption = 'Evento'
+          Width = 221
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'VALOR'
+          Title.Caption = 'Qtd'
+          Width = 100
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'HORA'
+          Title.Caption = 'Em HH:SS'
+          Width = 78
+          Visible = True
+        end>
+    end
+  end
+  object QrEnvelope: TADOQuery
+    Active = True
+    Connection = Pai.Genoma
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'select '
+      '      COD_PRO,'
+      #9'  Cha_pro as Chapa,'
+      #9'  NOM_PRO as Nome,'
+      #9'  PREL01_PROVENTO AS PROVENTO,'
+      #9'  PREL01_DES AS NOMEEVENTO,'
+      #9'  PREL01_REF AS REFERENCIA,'
+      #9'  PREL01_HORA AS HORA,'
+      #9'  PREL01_VALOR AS VALOR'
+      ' from tb_ptorel01 A'
+      ''
+      'Join TB_PROFISSIONAIS P on P.COD_PRO = A.prel01_chapa'
+      'Join TB_FUNCAO F        ON F.COD_FUNCAO = P.PRO_FUNCAOEXERCIDA'
+      'join TB_PTOFUNCOES G    on G.TFU_COD = F.FUN_TFU'
+      ''
+      ''
+      ''
+      'ORDER BY PREL01_ID'
+      ''
+      'select * from TB_PTOREL01'
+      ''
+      ''
+      ''
+      '')
+    Left = 460
+    Top = 451
+  end
+  object DtEnvelope: TDataSource
+    DataSet = QrEnvelope
+    Left = 401
+    Top = 451
+  end
+end

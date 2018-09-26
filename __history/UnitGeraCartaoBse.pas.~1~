@@ -1,0 +1,67 @@
+unit UnitGeraCartaoBse;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, ADODB, Grids, DBGrids, Buttons, ExtCtrls;
+
+type
+  TFormGeraCartaoBSE = class(TForm)
+    QrHora: TADOQuery;
+    DtHora: TDataSource;
+    Panel1: TPanel;
+    SpeedButton1: TSpeedButton;
+    DBGrid1: TDBGrid;
+    QrBse: TADOQuery;
+    procedure SpeedButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormGeraCartaoBSE: TFormGeraCartaoBSE;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFormGeraCartaoBSE.SpeedButton1Click(Sender: TObject);
+begin
+       Screen.Cursor:=CrHourGlass;
+              With QrBse Do
+                  begin
+                       Close;
+                       Sql.Clear;
+                       Sql.Add('delete tb_EscBseHorarios where 1>0');
+                       ExecSQL;
+                       Sql.Add('select * from tb_EscBseHorarios');
+                       Open;
+                  end;
+              With QrHora do
+                   Begin
+                         //Inserir os parametros
+                         Open;
+                         First;
+                         while Eof do
+                              begin
+
+
+
+
+                                   Next;
+                              end;
+
+                   End;
+
+
+
+
+
+
+       Screen.Cursor:=CrDefault;
+end;
+
+end.

@@ -1,0 +1,77 @@
+unit UnitGeraCartaoBse;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, ADODB, Grids, DBGrids, Buttons, ExtCtrls, Gauges;
+
+type
+  TFormGeraCartaoBSE = class(TForm)
+    QrHora: TADOQuery;
+    DtHora: TDataSource;
+    Panel1: TPanel;
+    SpeedButton1: TSpeedButton;
+    QrBse: TADOQuery;
+    DtBse: TDataSource;
+    Gauge1: TGauge;
+    procedure SpeedButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormGeraCartaoBSE: TFormGeraCartaoBSE;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFormGeraCartaoBSE.SpeedButton1Click(Sender: TObject);
+begin
+       Screen.Cursor:=CrHourGlass;
+              With QrBse Do
+                  begin
+                       Close;
+                       Sql.Clear;
+                       Sql.Add('delete tb_EscBseCartao where 1>0');
+                       ExecSQL;
+                       Sql.Add('select * from tb_EscBseCartao');
+                       Open;
+                  end;
+              With QrHora do
+                   Begin
+                         //Inserir os parametros
+                         Open;
+                         Gauge1.MaxValue:=RecordCount;
+                         First;
+                         while Eof do
+                              begin
+                                   DtBse.DataSet.Insert;
+                                   DtBse.DataSet.FieldByName('Cbse_Nome').AsString:=QrHora.FieldByName('Hor_Tabela').AsString;
+                                   if QrHora.FieldByName('Iti_Sentido').AsString = '0' then
+                                         begin
+                                              DtBse.DataSet.FieldByName('Cbse_Ida').AsString:=QrHora.FieldByName('Hor_hora').AsString;
+                                              DtBse.DataSet.FieldByName('Cbse_IdaText').AsString:=QrHora.FieldByName('Hor_Inf').AsString
+                                         end
+                                         else
+                                         begin
+                                              DtBse.DataSet.FieldByName('Cbse_VoltaText').AsString:=QrHora.FieldByName('Hor_Inf').AsString;
+                                              DtBse.DataSet.FieldByName('Cbse_Volta').AsString:=QrHora.FieldByName('Hor_hora').AsString;
+                                         end;
+                                   DtBse.DataSet.FieldByName('Cbse_Linha').AsString:=QrHora.FieldByName('Hor_Linha').AsString;
+                                   DtBse.DataSet.Post;
+                                   Gauge1.Progress:=Gauge1.Progress+1;
+                                   Next;
+                              end;
+
+                   End;
+
+
+       Screen.Cursor:=CrDefault;
+       MessageBox(0, 'Ja Gerei seu movimento, Pode imprimir...', 'Resolvido', MB_ICONINFORMATION or MB_OK);
+end;
+
+end.

@@ -1,0 +1,367 @@
+unit UnitImportaEscala;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, pngimage, ExtCtrls, StdCtrls, Buttons, ComCtrls, DB, ADODB, Grids,
+  DBGrids;
+
+type
+  TFormImportaEscala = class(TForm)
+    Panel1: TPanel;
+    Image2: TImage;
+    GroupBox1: TGroupBox;
+    Label2: TLabel;
+    Label5: TLabel;
+    EditData: TLabel;
+    EditSemana: TLabel;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSemi: TTabSheet;
+    Panel2: TPanel;
+    EditEntrada: TLabel;
+    EditIti: TLabel;
+    EditItf: TLabel;
+    EditSaida: TLabel;
+    EditIntervalo: TLabel;
+    EditChapa: TLabel;
+    EditNome: TLabel;
+    EditSaldoPto: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    BitBtn2: TBitBtn;
+    BitBtn1: TBitBtn;
+    QrTemp: TADOQuery;
+    DtDadosEscala: TDataSource;
+    EditLocal: TLabel;
+    BitBtn3: TBitBtn;
+    TabSheet3: TTabSheet;
+    DBGrid1: TDBGrid;
+    Memo1: TMemo;
+    Label1: TLabel;
+    Panel3: TPanel;
+    EditEntradaSemi: TLabel;
+    EditItiSemi: TLabel;
+    EditItfSemi: TLabel;
+    EditSaidaSemi: TLabel;
+    EditIntervaloSemi: TLabel;
+    EditChapaSemi: TLabel;
+    EditNomeSemi: TLabel;
+    EditTotalSemi: TLabel;
+    Label20: TLabel;
+    Label21: TLabel;
+    Label22: TLabel;
+    Label23: TLabel;
+    Label24: TLabel;
+    Label25: TLabel;
+    Label26: TLabel;
+    Label27: TLabel;
+    EditLocalSemi: TLabel;
+    SpeedButton1: TSpeedButton;
+    DtDadosEscalaSemi: TDataSource;
+    Label12: TLabel;
+    EditBarras: TEdit;
+    procedure Image2Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure montatela;
+    procedure BitBtn3Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure LimpaTela;
+    procedure EditBarrasKeyPress(Sender: TObject; var Key: Char);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+          Vsalva:Word;
+  end;
+
+var
+  FormImportaEscala: TFormImportaEscala;
+
+implementation
+
+uses UnitLancamento, UnitPai, UnitDialogoImporta;
+
+{$R *.dfm}
+
+procedure TFormImportaEscala.BitBtn1Click(Sender: TObject);
+begin
+         Screen.Cursor:=CrHourGlass;
+
+         With pai.QrDadosEscala do
+               begin
+                      Close;
+                      Parameters.ParamByName('Dia').Value := DateToStr(FormLancamento.VDataLancamento);
+                      Parameters.ParamByName('Coligada').Value := Pai.QrColigadas.FieldByName('cod_coligada').AsString;
+                      Open;
+                      First;
+                      if Not Eof then
+                                  repeat
+                                  Begin;
+                                           Montatela;
+                                           QrTemp.Close;
+                                           Qrtemp.SQL.Clear;
+                                           Qrtemp.SQL.add('select * from tb_ptomov where pto_data = ' + QuotedStr(DateToStr(FormLancamento.VDataLancamento)));
+                                           Qrtemp.SQL.Add('and Pto_Periodo = ' + Pai.QrPeriodoAtivo.FieldByName('PTUSU_PERIODO').AsString);
+                                           Qrtemp.SQL.Add('And Pto_Coligada = ' + Pai.QrColigadas.FieldByName('cod_coligada').AsString);
+                                           Qrtemp.SQL.Add('and pto_matricula = ' + DtDadosEscala.DataSet.FieldByName('Chapa').AsString);
+                                           memo1.Text:=Qrtemp.SQL.text;
+                                           Qrtemp.Open;
+                                           if Qrtemp.eof then
+                                                 begin
+                                                     //Grava PTOMOV
+                                                     Pai.JorEntrada:=0; Pai.JorSaida:=0; Pai.JorIti:=0; Pai.JorItf:=0; Pai.JorIntervalo:=0;
+                                                     Pai.PtoCod         :=Pai.GeraSeq('PtoMov'); // Gera Pto_ID
+                                                     Pai.SqlChapa       :=DtDadosEscala.DataSet.FieldByName('CodPro').Asstring;
+                                                     Pai.PtoUsuario     :=Pai.Qrusuarios.FieldByName('Usu_Codigo').AsInteger;
+                                                     Pai.PtoPeriodo     :=FormLancamento.DtPeriodo.DataSet.FieldByName('Tpe_Cod').AsInteger;
+                                                     Pai.PtoEvento      :=1; // considerei que nesta tela de lancamento, todos eventos serao normais, trataremoa as exessoes em outro modulo                     Pai.PtoPeriodo :=DtPeriodoAtivo.DataSet.FieldByName('Tpe_Cod').AsInteger;
+                                                     Pai.PtoData        :=FormLancamento.VDataLancamento;
+                                                     Pai.PtoFun         :=DtDadosEscala.DataSet.FieldByName('Perfil').AsInteger;
+                                                     Pai.JorEntrada     :=StrToTime(DtDadosEscala.DataSet.FieldByName('Pim_Entrada').AsString);
+                                                     Pai.JorSaida       :=StrToTime(DtDadosEscala.DataSet.FieldByName('Pim_Saida').AsString);
+                                                     Pai.JorITI         :=StrToTime(DtDadosEscala.DataSet.FieldByName('Pim_Iti').AsString);
+                                                     Pai.JorItf         :=StrToTime(DtDadosEscala.DataSet.FieldByName('Pim_Itf').AsString);
+                                                     Pai.JorIntervalo   :=StrToTime(DtDadosEscala.DataSet.FieldByName('Intervalo').AsString);
+
+                                                     if Pai.QrDadosEscala.FieldByName('Veiculo').AsString <> NULL then
+                                                            Pai.JorLocal       :='NULL'
+                                                            else
+                                                            Pai.JorLocal       :=Pai.QrDadosEscala.FieldByName('Veiculo').AsString;
+                                                     Pai.JorMatricula   :=DtDadosEscala.DataSet.FieldByName('Chapa').Asstring;
+                                                     Pai.JorSaldo       :=EditSaldoPto.Caption;
+                                                     Pai.JorRef         :=StrToInt(DtDadosEscala.DataSet.FieldByName('Saldo_Ref').AsString);
+                                                     // Funcao caucula ref do total de hoars da linah jornada, diferente do saldo de horas do movimento
+                                                     Pai.InserirMov1Click(nil);
+                                                     memo1.text:=pai.SqlMov.SQL.Text
+                                                 end
+                                                 else
+                                                 MessageBox(0, 'Eu vi que já tenho alguma coisa deste colaborador aqui, não posso fazer esse registro..'+#13+#10+''+#13+#10+'Verifique depois... vamos continuar!', 'Já tem alguma coisa lá', MB_ICONWARNING or MB_OK);
+
+                                      if (MessageDlg('Devo continuar te ajudando?', mtConfirmation, [mbYes, mbNo], 0) = mrYes) then
+                                                   next
+                                                       Else
+                                                   Abort;
+                                       end;
+                                  until eof;
+               end;
+
+           Screen.Cursor:=CrDefault;
+
+end;
+
+procedure TFormImportaEscala.BitBtn3Click(Sender: TObject);
+begin
+//         DtDadosEscala.DataSet.Open;
+         montatela;
+end;
+
+procedure TFormImportaEscala.EditBarrasKeyPress(Sender: TObject; var Key: Char);
+begin
+       if key =  #13 then
+                begin
+                      SpeedButton1.Click;
+                end;
+
+end;
+
+procedure TFormImportaEscala.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+//       Action:=Cafree;
+end;
+
+procedure TFormImportaEscala.FormShow(Sender: TObject);
+begin
+        Label2.Caption        :=FormLancamento.label3.Caption;
+        Label5.Caption        :=FormLancamento.label2.Caption;
+        Editdata.Caption      :=FormLancamento.EditData.Caption;
+        EditSemana.Caption    :=FormLancamento.EditSemana.Caption;
+        //Montatela;
+
+end;
+
+procedure TFormImportaEscala.Image2Click(Sender: TObject);
+begin
+Close;
+end;
+
+Procedure TFormimportaEscala.montatela;
+
+begin
+if pagecontrol1.TabIndex = 0 then
+     begin
+         EditNome.Caption       :=DtDadosEscala.DataSet.FieldByName('Nome').AsString;
+         EditChapa.Caption      :=DtDadosEscala.DataSet.FieldByName('Chapa').AsString ;
+         EditEntrada.caption    :=DtDadosEscala.DataSet.FieldByName('Pim_Entrada').AsString;
+         EditSaida.caption      :=DtDadosEscala.DataSet.FieldByName('Pim_Saida').AsString;
+         EditIti.caption        :=DtDadosEscala.DataSet.FieldByName('Pim_Iti').AsString;
+         EditItf.caption        :=DtDadosEscala.DataSet.FieldByName('Pim_Itf').AsString;
+         EditiNTERVALO.caption  :=DtDadosEscala.DataSet.FieldByName('Intervalo').AsString;
+         EditSaldoPto.Caption   :=Pai.GeraSaldo(DtDadosEscala.DataSet.FieldByName('Pim_Entrada').AsString,
+                                                DtDadosEscala.DataSet.FieldByName('Pim_Saida').AsString,
+                                                DtDadosEscala.DataSet.FieldByName('Intervalo').AsString);
+         EditLocal.caption      :=DtDadosEscala.DataSet.FieldByName('NumeroVeiculo').AsString;
+
+     end
+     else
+     begin
+         With pai.QrDadosEscalaSemi do
+               begin
+                      Close;
+                      Parameters.ParamByName('Dia').Value := DateToStr(FormLancamento.VDataLancamento);
+                      Parameters.ParamByName('Coligada').Value := Pai.QrColigadas.FieldByName('cod_coligada').AsString;
+                      Parameters.ParamByName('IdBSe').Value := FormLancamento.EditChapa.Text;
+                      //memo1.Text:=Qrtemp.SQL.text;
+                      Open;
+                      if not eof then
+                          begin
+                               EditNomeSemi.Caption        :=DtDadosEscalaSemi.DataSet.FieldByName('Nome').AsString;
+                               EditChapaSemi.Caption      :=DtDadosEscalaSemi.DataSet.FieldByName('Chapa').AsString ;
+                               EditEntradaSemi.caption    :=DtDadosEscalaSemi.DataSet.FieldByName('Pim_Entrada').AsString;
+                               EditSaidaSemi.caption      :=DtDadosEscalaSemi.DataSet.FieldByName('Pim_Saida').AsString;
+                               EditItiSemi.caption        :=DtDadosEscalaSemi.DataSet.FieldByName('Pim_Iti').AsString;
+                               EditItfSemi.caption        :=DtDadosEscalaSemi.DataSet.FieldByName('Pim_Itf').AsString;
+                               EditIntervaloSemi.caption  :=DtDadosEscalaSemi.DataSet.FieldByName('Intervalo').AsString;
+                               Edittotalsemi.Caption      :=Pai.GeraSaldo(DtDadosEscalaSemi.DataSet.FieldByName('Pim_Entrada').AsString,
+                                                                DtDadosEscalaSemi.DataSet.FieldByName('Pim_Saida').AsString,
+                                                                DtDadosEscalaSemi.DataSet.FieldByName('Intervalo').AsString);
+                               EditLocalsemi.caption      :=DtDadosEscalaSemi.DataSet.FieldByName('NumeroVeiculo').AsString;
+                          end;
+               end;
+
+     end;
+
+end;
+procedure TFormImportaEscala.SpeedButton1Click(Sender: TObject);
+begin
+         Screen.Cursor:=CrHourGlass;
+
+         With pai.QrDadosEscalaSemi do
+               begin
+                      Close;
+                      Parameters.ParamByName('Dia').Value := DateToStr(FormLancamento.VDataLancamento);
+                      Parameters.ParamByName('Coligada').Value := Pai.QrColigadas.FieldByName('cod_coligada').AsString;
+                      Parameters.ParamByName('IdBSe').Value := FormLancamento.EditChapa.Text;
+                      //memo1.Text:=Qrtemp.SQL.text;
+                      Open;
+//                      First;
+                      if Not Eof then
+                                  Begin;
+                                           Montatela;
+                                           QrTemp.Close;
+                                           Qrtemp.SQL.Clear;
+                                           Qrtemp.SQL.add('select * from tb_ptomov where pto_data = ' + QuotedStr(DateToStr(FormLancamento.VDataLancamento)));
+                                           Qrtemp.SQL.Add('and Pto_Periodo = '   + Pai.QrPeriodoAtivo.FieldByName('PTUSU_PERIODO').AsString);
+                                           Qrtemp.SQL.Add('And Pto_Coligada = '  + Pai.QrColigadas.FieldByName('cod_coligada').AsString);
+                                           Qrtemp.SQL.Add('and pto_matricula = ' + QuotedStr(DtDadosEscalaSemi.DataSet.FieldByName('Chapa').AsString));
+                                        //   memo1.Text:=Qrtemp.SQL.text;
+                                           Qrtemp.Open;
+                                           if Qrtemp.eof then
+                                                 begin
+                                                     //Grava PTOMOV
+                                                     pai.TipoEntrada:=0;
+                                                     Pai.JorEntrada:=0; Pai.JorSaida:=0; Pai.JorIti:=0; Pai.JorItf:=0; Pai.JorIntervalo:=0;
+                                                     Pai.PtoCod         :=Pai.GeraSeq('PtoMov'); // Gera Pto_ID
+                                                     Pai.SqlChapa       :=DtDadosEscalaSemi.DataSet.FieldByName('CodPro').Asstring;
+                                                     Pai.PtoUsuario     :=Pai.Qrusuarios.FieldByName('Usu_Codigo').AsInteger;
+                                                     Pai.PtoPeriodo     :=FormLancamento.DtPeriodo.DataSet.FieldByName('Tpe_Cod').AsInteger;
+                                                     Pai.PtoEvento      :=1; // considerei que nesta tela de lancamento, todos eventos serao normais, trataremoa as exessoes em outro modulo                     Pai.PtoPeriodo :=DtPeriodoAtivo.DataSet.FieldByName('Tpe_Cod').AsInteger;
+                                                     Pai.PtoData        :=FormLancamento.VDataLancamento;
+                                                     Pai.PtoFun         :=DtDadosEscalaSemi.DataSet.FieldByName('Perfil').AsInteger;
+                                                     Pai.JorEntrada     :=StrToTime(DtDadosEscalaSemi.DataSet.FieldByName('Pim_Entrada').AsString);
+                                                     Pai.JorSaida       :=StrToTime(DtDadosEscalaSemi.DataSet.FieldByName('Pim_Saida').AsString);
+                                                     Pai.JorITI         :=StrToTime(DtDadosEscalaSemi.DataSet.FieldByName('Pim_Iti').AsString);
+                                                     Pai.JorItf         :=StrToTime(DtDadosEscalaSemi.DataSet.FieldByName('Pim_Itf').AsString);
+                                                     Pai.JorIntervalo   :=StrToTime(DtDadosEscalaSemi.DataSet.FieldByName('Intervalo').AsString);
+
+                                                     if EditLocalSemi.Caption   = '0' then
+                                                            Pai.JorLocal       :='NULL'
+                                                            else
+                                                            Pai.JorLocal       :=Pai.QrDadosEscalaSemi.FieldByName('Veiculo').AsString;
+
+                                                     Pai.JorMatricula   :=DtDadosEscalaSemi.DataSet.FieldByName('Chapa').Asstring;
+                                                     Pai.JorSaldo       :=EditTotalSemi.Caption;
+                                                     Pai.JorRef         :=StrToInt(DtDadosEscalaSemi.DataSet.FieldByName('Saldo_Ref').AsString);
+                                                     // Funcao caucula ref do total de hoars da linah jornada, diferente do saldo de horas do movimento
+                                                     FormDialogoImporta.Showmodal;
+
+                                                    if Vsalva = 1 then
+                                                       begin
+                                                              mEMO1.Text:=pAI.SqlMov.SQL.Text;
+                                                              //Pai.InserirMov1Click(nil);
+
+                                                              FormLancamento.EditChapa.Text:='';
+
+                                                              FormLancamento.Vmatricula:= DtDadosEscalaSemi.DataSet.FieldByName('Chapa').Asstring;
+                                                              Formlancamento.MontaLanAnt;
+
+                                                       end;
+
+                                                    if Vsalva = 2 then
+                                                              begin
+                                                              Pai.InserirMov1Click(nil);
+                                                              FormLancamento.EditChapa.Text:= DtDadosEscalaSemi.DataSet.FieldByName('Chapa').Asstring;
+                                                              Formlancamento.MontaLanAnt;
+                                                              FormImportaEscala.Close;
+                                                              Formlancamento.Executa.Click;
+                                                              end;
+
+                                                    if Vsalva = 3 then
+                                                          begin
+                                                                FormLancamento.EditChapa.Text:='';
+                                                                Close;
+                                                          end;
+
+                                                 end
+                                                 else
+                                                 begin
+                                                      MessageBox(0, ''+#13+#10+'Caro usuário,'+#13+#10+''+#13+#10+'Já tenho um registro para este colaborador nesta data, não farei nada, você pode alterar...', 'Duplicidade', MB_ICONSTOP or MB_OK);
+                                                      FormLancamento.EditChapa.Text:='';
+                                                      close;
+                                                 end;
+                                  End ;
+                                 // else
+                                 // MessageBox(0, ''+#13+#10+'Pessoal,'+#13+#10+'Não encontrei nenhum registro com esse numero, você já importou o movimento deste dia?', 'BSE Não encontrado', MB_ICONEXCLAMATION or MB_OK);
+
+               end;
+
+
+           Screen.Cursor:=CrDefault;
+           //LimpaTela;
+          // FormLancamento.EditChapa.Text:='';
+           close;
+           //EditBarras.SetFocus;
+
+
+
+end;
+Procedure TFormimportaEscala.LimpaTela;
+begin
+         EditNomeSemi.Caption       :='';
+         EditChapaSemi.Caption      :='';
+         EditEntradaSemi.caption    :='00:00';
+         EditSaidaSemi.caption      :='00:00';
+         EditItiSemi.caption        :='00:00';
+         EditItfSemi.caption        :='00:00';
+         EditiNTERVALOSemi.caption  := '0:00';
+         Edittotalsemi.Caption      :='00:00';
+         EditLocalsemi.caption      :='0';
+      //   EditBarras.Text:='';
+    //     Editbarras.SetFocus;
+
+
+end;
+
+
+
+
+end.

@@ -1,0 +1,84 @@
+unit UnitRelatorio;
+
+interface
+
+uses
+  SysUtils, Classes, RpRave, RpBase, RpSystem, RpRenderPDF, RpDefine, RpRender,
+  RpRenderText, RpCon, RpConDS, DB, ADODB;
+
+type
+  TRelatorio = class(TDataModule)
+    RvRenderText1: TRvRenderText;
+    RvRenderPDF1: TRvRenderPDF;
+    Projeto: TRvProject;
+    QrEscHorarios: TADOQuery;
+    DtEscHorarios: TRvDataSetConnection;
+    CnColigadas: TRvDataSetConnection;
+    QrFco: TADOQuery;
+    DtFco: TRvDataSetConnection;
+    QrFcoMsg: TADOQuery;
+    DtFcoMsg: TRvDataSetConnection;
+    QrGpsHorVei: TADOQuery;
+    DtGpsHorVei: TRvDataSetConnection;
+    QrTabelaBse: TADOQuery;
+    DTTabelaBse: TRvDataSetConnection;
+    QrBseCartao: TADOQuery;
+    DtBseCartao: TRvDataSetConnection;
+    QrBseCartao2: TADOQuery;
+    DtBseCartao2: TRvDataSetConnection;
+    CnMovPeriodoDias: TRvDataSetConnection;
+    QrMovPerLanDia: TADOQuery;
+    CnMovPerLanDia: TRvDataSetConnection;
+    QrMovConsistencia: TADOQuery;
+    CnMovConssitencia: TRvDataSetConnection;
+    QrMovEventoColaborador: TADOQuery;
+    CnMovEventoColaborador: TRvDataSetConnection;
+    CnMovPeriodoMes: TRvDataSetConnection;
+    QrMovPeriodoMes: TADOQuery;
+    QrMovPontoDiario: TADOQuery;
+    QrRelEventos01: TADOQuery;
+    CnRelEventos01: TRvDataSetConnection;
+    QrInterJornada: TADOQuery;
+    CnInterJornada: TRvDataSetConnection;
+    QrCriticaIntervalo: TADOQuery;
+    CnCriticaIntervalo: TRvDataSetConnection;
+    QrCriticaExesso: TADOQuery;
+    CnCriticaExesso: TRvDataSetConnection;
+    QrCriticaFolgas: TADOQuery;
+    CnCriticaFolgas: TRvDataSetConnection;
+    QrEventosDetalhados: TADOQuery;
+    CnEveNtosDetalhados: TRvDataSetConnection;
+    QrIndicadores: TADOQuery;
+    CnIndicadores: TRvDataSetConnection;
+    QrListaHoraDevida: TADOQuery;
+    CnListaHoraDevida: TRvDataSetConnection;
+    QrListaHoraExtra: TADOQuery;
+    CnListahoraExtra: TRvDataSetConnection;
+    QrEspelhoPontoMod2: TADOQuery;
+    CnEspelhoPontoMod2: TRvDataSetConnection;
+    QrIndPlanilha1: TADOQuery;
+    CnIndPlanilha1: TRvDataSetConnection;
+    QrEtiquetaCartao: TADOQuery;
+    CnEtiquetaCartao: TRvDataSetConnection;
+    QrEspPontoMod3: TADOQuery;
+    CnEspPntMod3: TRvDataSetConnection;
+    QrHoraExtDev: TADOQuery;
+    CnHoraExtDev: TRvDataSetConnection;
+    BkHoraExtDev: TADOQuery;
+    RvSystem2: TRvSystem;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Relatorio: TRelatorio;
+
+implementation
+
+uses UnitPai;
+
+{$R *.dfm}
+
+end.

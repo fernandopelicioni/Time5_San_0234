@@ -1,0 +1,343 @@
+unit UnitIndicadorGrafico;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Grids, DBGrids, DB, ADODB;
+
+type
+  TFormIndicadorGrafico = class(TForm)
+    DtPlanilha: TDataSource;
+    QrIndPlanilha1: TADOQuery;
+    DBGrid1: TDBGrid;
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormIndicadorGrafico: TFormIndicadorGrafico;
+
+implementation
+
+uses UnitRelatorio;
+
+{$R *.dfm}
+
+procedure TFormIndicadorGrafico.DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumn; State: TGridDrawState);
+  var evento: Word;
+  Coluna : string;
+begin
+      Coluna:= Column.Field.FieldName; // Aqui o campo a colorir
+      if coluna = '26' then
+            begin
+                              Evento:= QrIndPlanilha1.FieldByName('26').AsInteger;
+                              case Evento of
+                                   1 :  begin   DBGrid1.Canvas.Brush.Color:= clblue;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   2 :  begin   DBGrid1.Canvas.Brush.Color:= clGreen;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   3 :  begin   DBGrid1.Canvas.Brush.Color:= clRed;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   4 :  begin   DBGrid1.Canvas.Brush.Color:= clFuchsia;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   5 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   8 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   7 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   11 :  begin   DBGrid1.Canvas.Brush.Color:= $004080FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   12 :  begin   DBGrid1.Canvas.Brush.Color:= $008000FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   13 :  begin   DBGrid1.Canvas.Brush.Color:= clPurple;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   14 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   16 :  begin   DBGrid1.Canvas.Brush.Color:= clLime;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                              end;
+            end;
+
+      if coluna = '27' then
+            begin
+                              Evento:= QrIndPlanilha1.FieldByName('27').AsInteger;
+                              case Evento of
+                                   1 :  begin   DBGrid1.Canvas.Brush.Color:= clblue;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   2 :  begin   DBGrid1.Canvas.Brush.Color:= clGreen;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   3 :  begin   DBGrid1.Canvas.Brush.Color:= clRed;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   4 :  begin   DBGrid1.Canvas.Brush.Color:= clFuchsia;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   5 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   8 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   7 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   11 :  begin   DBGrid1.Canvas.Brush.Color:= $004080FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   12 :  begin   DBGrid1.Canvas.Brush.Color:= $008000FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   13 :  begin   DBGrid1.Canvas.Brush.Color:= clPurple;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   14 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   16 :  begin   DBGrid1.Canvas.Brush.Color:= clLime;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+
+                              end;
+
+            end;
+
+      if coluna = '28' then
+            begin
+                              Evento:= QrIndPlanilha1.FieldByName('28').AsInteger;
+                              case Evento of
+                                   1 :  begin   DBGrid1.Canvas.Brush.Color:= clblue;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   2 :  begin   DBGrid1.Canvas.Brush.Color:= clGreen;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   3 :  begin   DBGrid1.Canvas.Brush.Color:= clRed;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   4 :  begin   DBGrid1.Canvas.Brush.Color:= clFuchsia;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   5 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   8 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   7 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   11 :  begin   DBGrid1.Canvas.Brush.Color:= $004080FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   12 :  begin   DBGrid1.Canvas.Brush.Color:= $008000FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   13 :  begin   DBGrid1.Canvas.Brush.Color:= clPurple;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   14 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   16 :  begin   DBGrid1.Canvas.Brush.Color:= clLime;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+
+                              end;
+
+            end;
+
+      if coluna = '29' then
+            begin
+                              Evento:= QrIndPlanilha1.FieldByName('29').AsInteger;
+                              case Evento of
+                                   1 :  begin   DBGrid1.Canvas.Brush.Color:= clblue;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   2 :  begin   DBGrid1.Canvas.Brush.Color:= clGreen;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   3 :  begin   DBGrid1.Canvas.Brush.Color:= clRed;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   4 :  begin   DBGrid1.Canvas.Brush.Color:= clFuchsia;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   5 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   8 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   7 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   11 :  begin   DBGrid1.Canvas.Brush.Color:= $004080FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   12 :  begin   DBGrid1.Canvas.Brush.Color:= $008000FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   13 :  begin   DBGrid1.Canvas.Brush.Color:= clPurple;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   14 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   16 :  begin   DBGrid1.Canvas.Brush.Color:= clLime;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+
+                              end;
+
+            end;
+
+      if coluna = '30' then
+            begin
+                              Evento:= QrIndPlanilha1.FieldByName('30').AsInteger;
+                              case Evento of
+                                   1 :  begin   DBGrid1.Canvas.Brush.Color:= clblue;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   2 :  begin   DBGrid1.Canvas.Brush.Color:= clGreen;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   3 :  begin   DBGrid1.Canvas.Brush.Color:= clRed;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   4 :  begin   DBGrid1.Canvas.Brush.Color:= clFuchsia;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   5 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   8 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   7 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   11 :  begin   DBGrid1.Canvas.Brush.Color:= $004080FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   12 :  begin   DBGrid1.Canvas.Brush.Color:= $008000FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   13 :  begin   DBGrid1.Canvas.Brush.Color:= clPurple;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   14 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   16 :  begin   DBGrid1.Canvas.Brush.Color:= clLime;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+
+                              end;
+
+            end;
+
+
+      if coluna = '31' then
+            begin
+                              Evento:= QrIndPlanilha1.FieldByName('31').AsInteger;
+                              case Evento of
+                                   1 :  begin   DBGrid1.Canvas.Brush.Color:= clblue;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   2 :  begin   DBGrid1.Canvas.Brush.Color:= clGreen;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   3 :  begin   DBGrid1.Canvas.Brush.Color:= clRed;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   4 :  begin   DBGrid1.Canvas.Brush.Color:= clFuchsia;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   5 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   8 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   7 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   11 :  begin   DBGrid1.Canvas.Brush.Color:= $004080FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   12 :  begin   DBGrid1.Canvas.Brush.Color:= $008000FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   13 :  begin   DBGrid1.Canvas.Brush.Color:= clPurple;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   14 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   16 :  begin   DBGrid1.Canvas.Brush.Color:= clLime;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+
+                              end;
+
+            end;
+
+
+      if coluna = '01' then
+            begin
+                              Evento:= QrIndPlanilha1.FieldByName('01').AsInteger;
+                              case Evento of
+                                   1 :  begin   DBGrid1.Canvas.Brush.Color:= clblue;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   2 :  begin   DBGrid1.Canvas.Brush.Color:= clGreen;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   3 :  begin   DBGrid1.Canvas.Brush.Color:= clRed;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   4 :  begin   DBGrid1.Canvas.Brush.Color:= clFuchsia;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   5 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   8 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   7 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   11 :  begin   DBGrid1.Canvas.Brush.Color:= $004080FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   12 :  begin   DBGrid1.Canvas.Brush.Color:= $008000FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   13 :  begin   DBGrid1.Canvas.Brush.Color:= clPurple;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   14 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   16 :  begin   DBGrid1.Canvas.Brush.Color:= clLime;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+
+                              end;
+
+            end;
+
+
+      if coluna = '02' then
+            begin
+                              Evento:= QrIndPlanilha1.FieldByName('02').AsInteger;
+                              case Evento of
+                                   1 :  begin   DBGrid1.Canvas.Brush.Color:= clblue;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   2 :  begin   DBGrid1.Canvas.Brush.Color:= clGreen;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   3 :  begin   DBGrid1.Canvas.Brush.Color:= clRed;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   4 :  begin   DBGrid1.Canvas.Brush.Color:= clFuchsia;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   5 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   8 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   7 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   11 :  begin   DBGrid1.Canvas.Brush.Color:= $004080FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   12 :  begin   DBGrid1.Canvas.Brush.Color:= $008000FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   13 :  begin   DBGrid1.Canvas.Brush.Color:= clPurple;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   14 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   16 :  begin   DBGrid1.Canvas.Brush.Color:= clLime;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+
+                              end;
+
+            end;
+
+
+      if coluna = '03' then
+            begin
+                              Evento:= QrIndPlanilha1.FieldByName('03').AsInteger;
+                              case Evento of
+                                   1 :  begin   DBGrid1.Canvas.Brush.Color:= clblue;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   2 :  begin   DBGrid1.Canvas.Brush.Color:= clGreen;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   3 :  begin   DBGrid1.Canvas.Brush.Color:= clRed;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   4 :  begin   DBGrid1.Canvas.Brush.Color:= clFuchsia;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   5 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   8 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   7 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   11 :  begin   DBGrid1.Canvas.Brush.Color:= $004080FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   12 :  begin   DBGrid1.Canvas.Brush.Color:= $008000FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   13 :  begin   DBGrid1.Canvas.Brush.Color:= clPurple;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   14 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   16 :  begin   DBGrid1.Canvas.Brush.Color:= clLime;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+
+                              end;
+
+            end;
+
+      if coluna = '04' then
+            begin
+                              Evento:= QrIndPlanilha1.FieldByName('04').AsInteger;
+                              case Evento of
+                                   1 :  begin   DBGrid1.Canvas.Brush.Color:= clblue;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   2 :  begin   DBGrid1.Canvas.Brush.Color:= clGreen;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   3 :  begin   DBGrid1.Canvas.Brush.Color:= clRed;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   4 :  begin   DBGrid1.Canvas.Brush.Color:= clFuchsia;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   5 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   8 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   7 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   11 :  begin   DBGrid1.Canvas.Brush.Color:= $004080FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   12 :  begin   DBGrid1.Canvas.Brush.Color:= $008000FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   13 :  begin   DBGrid1.Canvas.Brush.Color:= clPurple;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   14 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   16 :  begin   DBGrid1.Canvas.Brush.Color:= clLime;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+
+                              end;
+
+            end;
+
+
+      if coluna = '05' then
+            begin
+                              Evento:= QrIndPlanilha1.FieldByName('05').AsInteger;
+                              case Evento of
+                                   1 :  begin   DBGrid1.Canvas.Brush.Color:= clblue;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   2 :  begin   DBGrid1.Canvas.Brush.Color:= clGreen;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   3 :  begin   DBGrid1.Canvas.Brush.Color:= clRed;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   4 :  begin   DBGrid1.Canvas.Brush.Color:= clFuchsia;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   5 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   8 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   7 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   11 :  begin   DBGrid1.Canvas.Brush.Color:= $004080FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   12 :  begin   DBGrid1.Canvas.Brush.Color:= $008000FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   13 :  begin   DBGrid1.Canvas.Brush.Color:= clPurple;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   14 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   16 :  begin   DBGrid1.Canvas.Brush.Color:= clLime;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+
+                              end;
+
+            end;
+
+
+      if coluna = '06' then
+            begin
+                              Evento:= QrIndPlanilha1.FieldByName('06').AsInteger;
+                              case Evento of
+                                   1 :  begin   DBGrid1.Canvas.Brush.Color:= clblue;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   2 :  begin   DBGrid1.Canvas.Brush.Color:= clGreen;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   3 :  begin   DBGrid1.Canvas.Brush.Color:= clRed;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   4 :  begin   DBGrid1.Canvas.Brush.Color:= clFuchsia;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   5 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   8 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   7 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   11 :  begin   DBGrid1.Canvas.Brush.Color:= $004080FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   12 :  begin   DBGrid1.Canvas.Brush.Color:= $008000FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   13 :  begin   DBGrid1.Canvas.Brush.Color:= clPurple;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   14 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   16 :  begin   DBGrid1.Canvas.Brush.Color:= clLime;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+
+                              end;
+
+            end;
+
+
+      if coluna = '07' then
+            begin
+                              Evento:= QrIndPlanilha1.FieldByName('07').AsInteger;
+                              case Evento of
+                                   1 :  begin   DBGrid1.Canvas.Brush.Color:= clblue;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   2 :  begin   DBGrid1.Canvas.Brush.Color:= clGreen;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   3 :  begin   DBGrid1.Canvas.Brush.Color:= clRed;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   4 :  begin   DBGrid1.Canvas.Brush.Color:= clFuchsia;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   5 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   8 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   7 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   11 :  begin   DBGrid1.Canvas.Brush.Color:= $004080FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   12 :  begin   DBGrid1.Canvas.Brush.Color:= $008000FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   13 :  begin   DBGrid1.Canvas.Brush.Color:= clPurple;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   14 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   16 :  begin   DBGrid1.Canvas.Brush.Color:= clLime;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+
+                              end;
+
+            end;
+
+
+      if coluna = '08' then
+            begin
+                              Evento:= QrIndPlanilha1.FieldByName('08').AsInteger;
+                              case Evento of
+                                   1 :  begin   DBGrid1.Canvas.Brush.Color:= clblue;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   2 :  begin   DBGrid1.Canvas.Brush.Color:= clGreen;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   3 :  begin   DBGrid1.Canvas.Brush.Color:= clRed;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   4 :  begin   DBGrid1.Canvas.Brush.Color:= clFuchsia;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   5 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   8 :  begin   DBGrid1.Canvas.Brush.Color:= clBlack;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   7 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   11 :  begin   DBGrid1.Canvas.Brush.Color:= $004080FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   12 :  begin   DBGrid1.Canvas.Brush.Color:= $008000FF;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   13 :  begin   DBGrid1.Canvas.Brush.Color:= clPurple;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   14 :  begin   DBGrid1.Canvas.Brush.Color:= clGray;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+                                   16 :  begin   DBGrid1.Canvas.Brush.Color:= clLime;     DBGrid1.Canvas.FillRect(Rect);      DBGrid1.DefaultDrawColumnCell(Rect, DataCol, Column, State);    end;
+
+                              end;
+
+            end;
+
+
+
+
+
+end;
+
+end.

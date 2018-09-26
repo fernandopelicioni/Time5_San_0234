@@ -1,0 +1,93 @@
+unit UnitAtivaPeriodo;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, ExtCtrls, ToolWin, ComCtrls, Grids, DBGrids, ImgList, StdCtrls,
+  DBCtrls;
+
+type
+  TFormAtivaPeriodos = class(TForm)
+    ToolBar1: TToolBar;
+    Panel1: TPanel;
+    DtPeriodos: TDataSource;
+    DBGrid1: TDBGrid;
+    ToolButton1: TToolButton;
+    GroupBox1: TGroupBox;
+    DBText1: TDBText;
+    Label1: TLabel;
+    DBText2: TDBText;
+    Label2: TLabel;
+    Label3: TLabel;
+    DBText3: TDBText;
+    Label5: TLabel;
+    DBText5: TDBText;
+    Label6: TLabel;
+    DBText6: TDBText;
+    Label4: TLabel;
+    DBText4: TDBText;
+    ToolButton2: TToolButton;
+    ToolButton3: TToolButton;
+    ToolButton4: TToolButton;
+    ImageList1: TImageList;
+    DBText7: TDBText;
+    Label7: TLabel;
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure FormActivate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure ToolButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormAtivaPeriodos: TFormAtivaPeriodos;
+
+implementation
+
+uses UnitPai, UnitPeriodoCriar;
+
+{$R *.dfm}
+
+procedure TFormAtivaPeriodos.DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumn; State: TGridDrawState);
+
+begin
+//tipo :=DTQrCandidatos.DataSet.FieldByName('can_Status').AsString;
+
+if Column.index =  0 then
+   begin
+   DbGrid1.Canvas.FillRect(Rect);
+   if DtPeriodos.DataSet.FieldByName('Tpe_Ativo').AsString = '1' then
+         ImageList1.Draw(DbGrid1.Canvas,Rect.Left+15,Rect.Top+1,1)
+      else
+         ImageList1.Draw(DbGrid1.Canvas,Rect.Left+15,Rect.Top+1,0)
+      end;
+
+
+end;
+
+procedure TFormAtivaPeriodos.FormActivate(Sender: TObject);
+begin
+        Pai.QrPeriodos.Parameters.ParamByName('coligada').Value:=Pai.QrColigadas.FieldByName('cod_coligada').AsString;
+        DtPeriodos.DataSet.Open;
+end;
+
+procedure TFormAtivaPeriodos.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+DtPeriodos.DataSet.Close;
+Action:=Cafree;
+end;
+
+procedure TFormAtivaPeriodos.ToolButton1Click(Sender: TObject);
+begin
+Application.CreateForm(TFormPeriodoCriar, FormPeriodoCriar);
+FormPeriodoCriar.Showmodal;
+end;
+
+end.

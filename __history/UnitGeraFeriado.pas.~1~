@@ -1,0 +1,56 @@
+unit UnitGeraFeriado;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ComCtrls, Buttons, ExtCtrls, DB, ADODB;
+
+type
+  TFormGeraFeriado = class(TForm)
+    Panel2: TPanel;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    DtIni: TDateTimePicker;
+    Label1: TLabel;
+    QrParams: TADOQuery;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormActivate(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormGeraFeriado: TFormGeraFeriado;
+
+implementation
+
+uses UnitPai;
+
+{$R *.dfm}
+
+procedure TFormGeraFeriado.FormActivate(Sender: TObject);
+begin
+           DtIni.Date:=now;
+end;
+
+procedure TFormGeraFeriado.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+           action:=cafree;
+end;
+
+procedure TFormGeraFeriado.SpeedButton2Click(Sender: TObject);
+
+var     Q,q2: tadoquery;
+        X : integer;
+        VENTRADAREF, VSAIDAREF, ADREF, FADREF, VCODPROATUAL: Integer;
+begin
+                Q:=tadoquery.create(nil);
+                Q.Connection:=Pai.Genoma;
+
+end;
+
+end.

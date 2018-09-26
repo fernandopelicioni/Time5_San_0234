@@ -1,0 +1,96 @@
+unit UnitRelogio;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, jpeg, Keyboard, StdCtrls,ADODB, DB;
+
+type
+  TFormRelogio = class(TForm)
+    Timer1: TTimer;
+    LabelHora: TLabel;
+    LabelData: TLabel;
+    DtColigada: TDataSource;
+    QrTemp: TADOQuery;
+    Shape1: TShape;
+    LabelColigada: TLabel;
+    Shape2: TShape;
+    procedure FormCreate(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormRelogio: TFormRelogio;
+
+implementation
+
+uses UnitPai;
+
+{$R *.dfm}
+
+procedure TFormRelogio.Edit1KeyPress(Sender: TObject; var Key: Char);
+begin
+     if Key = #13 then
+         begin
+              Key:=#0;
+              // Some teclado
+              //Mostra Cartao
+
+         end;
+end;
+
+procedure TFormRelogio.FormCreate(Sender: TObject);
+begin
+{             With FormRelogio do
+                  Begin
+                      top :=0;
+                      Left :=0;
+                      Width := Screen.Width;
+                      Height := Screen.Height;
+
+                  End;
+                DtColigada.DataSet.Open;
+                LabelColigada.Caption:=DtColigada.DataSet.FieldByName('Des_Coligada').AsString;
+//              PainelRelogio.left:=Trunc((FormRelogio.width - PainelRelogio.Width) / 2);
+//              PainelRelogio.top:=Trunc((FormRelogio.Height - PainelRelogio.Height) / 2);    }
+
+end;
+
+procedure TFormRelogio.FormShow(Sender: TObject);
+begin
+             With FormRelogio do
+                  Begin
+                      top :=0;
+                      Left :=0;
+                      Width := Screen.Width;
+                      Height := Screen.Height;
+
+                  End;
+                DtColigada.DataSet.Open;
+                LabelColigada.Caption:=DtColigada.DataSet.FieldByName('Des_Coligada').AsString;
+
+end;
+
+procedure TFormRelogio.Timer1Timer(Sender: TObject);
+var Q,q2: tadoquery;
+
+begin
+       QrTemp.Close;
+       QrTemp.Open;
+       LabelHora.Caption:=QrTemp.FieldByName('hora').Text;
+       LabelData.Caption:=QrTemp.FieldByName('DiaSemana').Text +', ' + QrTemp.FieldByName('Dia').Text+' de ' + QrTemp.FieldByName('Mes').Text+' de '+ QrTemp.FieldByName('ano').Text;
+//labelHora.Caption:=
+end;
+
+
+
+
+
+end.
