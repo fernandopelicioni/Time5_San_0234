@@ -2459,7 +2459,7 @@ object FormIniciaSistema: TFormIniciaSistema
       Top = 293
       Width = 84
       Height = 29
-      Caption = '2.0.3.4'
+      Caption = '2.0.3.5'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 8388863
       Font.Height = -24
